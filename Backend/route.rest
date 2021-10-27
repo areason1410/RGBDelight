@@ -1,0 +1,11 @@
+###
+
+POST http://localhost:3000/PortAPI/changeColour
+Content-Type: application/json
+
+{
+    "red": 188,
+    "green": 33,
+    "blue": 255
+}
+
