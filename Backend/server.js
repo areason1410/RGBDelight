@@ -6,12 +6,13 @@ const app = express();
 const cors = require("cors")
 
 //routers
-const portRouter = require("./routes/port");
+//const portRouter = require("./routes/port");
 
 //use
 app.use(express.json());
 app.use(cors());
-app.use("/PortAPI", portRouter);
+app.use(express.static('../public'));
+//app.use("/PortAPI", portRouter);
 
 
 app.listen(3000, async () => {

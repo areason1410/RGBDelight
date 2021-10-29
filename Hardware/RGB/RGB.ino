@@ -40,7 +40,6 @@ void changeLedColours(uint8_t rVal, uint8_t gVal, uint8_t bVal)
 // (where 0 >= number >= 255).
 void checkInputs()
 {
-    uint8_t temp[3]{};
     while(Serial.available() > 0) 
     {
       changeLedColours(Serial.parseInt(), Serial.parseInt(), Serial.parseInt());
