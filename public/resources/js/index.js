@@ -25,7 +25,7 @@ sliderB.oninput = function() {
 }
 
 apply.addEventListener("click", async () => {
-    url = "http://192.168.0.43:3000/PortAPI/changeColour"
+    url = "http://localhost:3000/PortAPI/changeColour" //this will be the pis ip
     data = {
         "red": sliderR.value,
         "green": sliderG.value,
