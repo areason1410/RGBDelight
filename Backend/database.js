@@ -9,7 +9,8 @@ const database = new sqlite3.Database('Database/accounts.sqlite3', (err) => {
 })
 
 module.exports = {
-    initialiseDatabase
+    initialiseDatabase,
+    getUsers
 }
 
 async function initialiseDatabase() {
@@ -19,5 +20,14 @@ async function initialiseDatabase() {
                 console.error(err)
             }
         })
+    })
+}
+
+async function getUsers(callBack) {
+    db.get("SELECT * FROM accounts", (error, result) => {
+        if (error) {
+            return callBack(null)
+        }
+
     })
 }
