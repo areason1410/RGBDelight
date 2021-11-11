@@ -24,10 +24,10 @@ async function initialiseDatabase() {
 }
 
 async function getUsers(callBack) {
-    db.get("SELECT * FROM accounts", (error, result) => {
+    var accounts = db.get("SELECT * FROM accounts", (error, result) => {
         if (error) {
             return callBack(null)
         }
-
+        console.log(accounts)
     })
 }
