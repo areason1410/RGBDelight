@@ -4,11 +4,23 @@
     box-sizing: border-box;
   }
   
-  .content {
-    padding: 0;
+.content {
     margin: 0;
-    background-color: #bbbdf6;
-    text-align: center;
+    padding: 0;
+    color: #FFFFFF;
+    background-color: #222222;
     font-family: "nunito sans", sans-serif;
   }
   
+#heading {
+  font: size 30px;
+  align-items:center;
+  }
+
+.navBar {
+  position: fixed;
+  bottom: 0;
+  width: 100%;  
+  display: flex;
+  justify-content: space-evenly;
+}
