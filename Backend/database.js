@@ -28,6 +28,6 @@ async function getUsers(callBack) {
         if (error) {
             return callBack(null)
         }
-        console.log(accounts)
+
     })
 }
