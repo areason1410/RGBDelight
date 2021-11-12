@@ -4,44 +4,12 @@
     font-family: 'Nunito Sans', sans-serif;
 }
 
-.email {
+.email {}
 
+.password {}
 
-
-    background: #FFFFFF;
-    border: 1px solid #000000;
-    box-sizing: border-box;
-    border-radius: 4px;
-
-}
-
-.password {
-
-    background: #FFFFFF;
-    border: 1px solid #000000;
-    box-sizing: border-box;
-    border-radius: 4px;
-}
-
-.confirmPassword {
-    background: #FFFFFF;
-    border: 1px solid #000000;
-    box-sizing: border-box;
-    border-radius: 4px;
-}
+.confirmPassword {}
 
 .createAccount {}
 
-.login {
-    /* Already have an account? */
-
-
-
-    font-family: Nunito Sans;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 6.5px;
-    line-height: 9px;
-
-    color: #000000;
-}
+.login {}
