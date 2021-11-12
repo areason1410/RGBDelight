@@ -15,12 +15,12 @@
     justify-content: space-evenly;
 }
 
-.home {
+.navButton {
     display: flex;
     flex-direction: column;
-    max-height: 1rem;
+    max-height: 3.2rem;
 }
-
+/* 
 .settings {
     display: flex;
     flex-direction: column;
@@ -31,4 +31,4 @@
     display: flex;
     flex-direction: column;
     max-height: 1rem;
-} 
+}  */
