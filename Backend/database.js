@@ -31,3 +31,19 @@ async function getUsers(callBack) {
         console.log(accounts)
     })
 }
+
+async function addUser(username, password) {
+    var result = new Promise((resolve, reject) => {
+        db.run("INSERT INTO accounts(username, password) VALUES(?, ?)",[username, password], (err) => {
+            if(err) {
+                reject(err);
+            }
+            else {
+                resolve("good");
+            }
+        })
+    })
+    var res = await result;
+    return res;
+}
+
