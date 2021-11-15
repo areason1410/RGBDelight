@@ -9,4 +9,8 @@ router.get("/getUsers", async (req, res) => {
     })
 })
 
+router.post("addUser", async (reg, res) => {
+    db.addUser(reg.body.username, reg.body.username);
+}
+
 module.exports = router;
