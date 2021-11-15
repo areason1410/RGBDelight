@@ -4,12 +4,25 @@
     font-family: 'Nunito Sans', sans-serif;
 }
 
-.email {}
+.email {
+    font-size: 24px;
+    border-radius: 60%;
+}
 
-.password {}
+.password {
+    border-radius: 60%
+}
 
-.confirmPassword {}
+.confirmPassword {
+    border-radius: 60%
+}
 
-.createAccount {}
+.createAccount {
+    border-radius: 60%;
+    font-size: 24px
+}
 
-.login {}
+.login {
+    border-radius: 60%;
+    font-size: 16px
+}
