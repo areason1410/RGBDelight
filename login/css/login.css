@@ -1,33 +1,59 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito+Sans&display=swap');
 
+:root {
+    --skyBlue: #2DA7FF;
+    --deepBlue: #0E71B8;
+    --fogBlue: #bfdbf7;
+    --black: #081F2F;
+    --purple: #4e1b63;
+    --offWhite: #f6f7fb;
+    --dullGrey: #808080;
+    --background: #222222;
+}
 
 * {
     font-family: 'Nunito Sans', sans-serif;
     padding: 0;
     margin: 0;
-    background-color: #0e0e0e;
+    background-color: var(--background);
     box-sizing: border-box;
+    color: var(--offWhite);
 
 }
 
-.email {
-    color: #f6f7fb
-}
+.email {}
 
-.password {
-    color: #f6f7fb
-}
+.password {}
 
-.remeber {
-    color: #2DA7FF;
-}
+.remeber {}
 
 .forgot {}
 
-.create {
-    color: #2DA7FF
-}
+.create {}
 
 .login {
-    color: #f6f7fb
+    background-color: #662483;
+    color: #f6f7fb;
+    margin: 12px;
+    -webkit-box-shadow: 0px 0px 10px 6px rgba(221, 216, 206, 0.27);
+    box-shadow: 0px 0px 10px 6px rgba(221, 216, 206, 0.27);
+
+    line-height: 20px;
+    padding: 4px;
+    border-radius: 10px;
+    font-size: 20px;
+    font-weight: normal;
+    text-decoration: none;
+    font-style: normal;
+    font-variant: normal;
+    text-transform: none;
+    display: inline-block;
 }
+
+
+/* .myButton {
+  font-weight: normal; text-decoration: none; font-style: normal; font-variant: normal; text-transform: none; background-image: linear-gradient(to right, rgb(28, 110, 164) 0%, rgb(35, 136, 203) 50%, rgb(20, 78, 117) 100%); box-shadow: rgba(221, 216, 206, 0.27) 0px 0px 10px 6px; border: 2px solid rgb(28, 110, 164); display: inline-block;}
+.myButton:hover {
+background: #1C6EA4; }
+.myButton:active {
+background: #144E75; } */
