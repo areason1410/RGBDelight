@@ -10,7 +10,8 @@ const database = new sqlite3.Database('Database/accounts.sqlite3', (err) => {
 
 module.exports = {
     initialiseDatabase,
-    getUsers
+    getUsers,
+    addUser
 }
 
 async function initialiseDatabase() {
@@ -24,26 +25,26 @@ async function initialiseDatabase() {
 }
 
 async function getUsers(callBack) {
-    var accounts = db.get("SELECT * FROM accounts", (error, result) => {
-        if (error) {
+    var accounts = database.get("SELECT * FROM accounts", (error, result) => {
+        if (err) {
             return callBack(null)
         }
-        console.log(accounts)
+
     })
 }
 
 async function addUser(username, password) {
     var result = new Promise((resolve, reject) => {
-        db.run("INSERT INTO accounts(username, password) VALUES(?, ?)",[username, password], (err) => {
-            if(err) {
-                reject(err);
+        database.run("INSERT INTO accounts(username, password) VALUES(?, ?)", [username, password], (err) => {
+            if (err) {
+                reject(err)
             }
             else {
-                resolve("good");
+                resolve("Good")
             }
         })
     })
-    var res = await result;
-    return res;
-}
 
+    var res = await result
+    return res
+}

@@ -2,3 +2,12 @@
 
 GET http://localhost:3000/database/getUsers
 
+###
+
+POST http://localhost:3000/database/addUser
+Content-Type: application/json
+
+{
+    "username" : "benson",
+    "password" : "password123"
+}
