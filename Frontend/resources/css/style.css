@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans&display=swap');
+
+:root {
+    --blue: #00bae7;
+    --green: #00c142;
+    --orange: #e9b80d;
+    --purple: #b200c1;
+    --background: #222222;
+    --iceWhite: #f6f7fb;
+    --nav: #1d1d1d;
+    --skyBlue: #2da7ff;
+    --deepSea: #0e71b8;
+    --fog: #bfdbf7;
+    --blueBlack: #081f2f;
+    --emphesis: #4e1b63;
+}
+
+* {
+    background-color: var(--background);
+    color: var(--iceWhite);
+    font-family: 'Nunito Sans', sans-serif;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.navBar {
+    position: fixed;
+    bottom: 0;
+    width: 100%;  
+    display: flex;
+    justify-content: space-evenly;
+    background-color: var(--nav);
+}
+
+.navButton {
+    display: flex;
+    flex-direction: column;
+    max-height: 3.4rem;
+}
