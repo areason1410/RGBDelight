@@ -2,20 +2,40 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+    background-color: #222222;
+    font-family: "nunito sans", sans-serif;
+    
   }
   
 .content {
     margin: 0;
     padding: 0;
     color: #FFFFFF;
-    background-color: #222222;
-    font-family: "nunito sans", sans-serif;
+
+    
   }
   
 #heading {
-  font: size 30px;
+  font-size :40px;
   align-items:center;
-  }
+  padding: 20px;
+  font-weight: bolder;
+}
+.main{
+  border-radius: 5px;
+  height: 100px;
+  width: 150px;
+}
+#icon{
+ font-size :20px;
+ font-weight: 400px;
+ align-items: center;
+ padding-left: 30px;
+ padding-bottom: 10px;
+ justify-content: space-between;
+}
+
+
 
 .navBar {
   position: fixed;
@@ -24,3 +44,15 @@
   display: flex;
   justify-content: space-evenly;
 }
+
+p{
+  font-size: 10px;
+  justify-content: space-evenly;
+
+}
+#pad{
+border: black;
+
+ 
+}
+
