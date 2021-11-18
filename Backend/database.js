@@ -48,3 +48,25 @@ async function addUser(username, password) {
     var res = await result
     return res
 }
+
+function createAccount(username, password) {
+    var newUser = document.getElementById(email)
+    var newPass = document.getElementById(password)
+    var confirm = document.getElementById(confirmPassword)
+
+    if (newPass == confirm) {
+        database.run("INSERT INTO accounts(username, password) VALUES(?, ?)", [newUser, newPass], (err) => {
+            if (err) {
+                reject(err)
+            }
+            else {
+                resolve("Good")
+            }
+        }
+    }
+}
+
+
+function login(username, password) {
+
+}
