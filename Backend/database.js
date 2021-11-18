@@ -10,8 +10,7 @@ const database = new sqlite3.Database('Database/accounts.sqlite3', (err) => {
 
 module.exports = {
     initialiseDatabase,
-    getUsers,
-    addUser
+    getUsers
 }
 
 async function initialiseDatabase() {
@@ -21,52 +20,60 @@ async function initialiseDatabase() {
                 console.error(err)
             }
         })
+        //add database.run for colour table
+        database.run("CREATE TABLE IF NOT EXISTS colour(R text, G text, B text)", (err) => {
+            if (err) {
+                console.log(err)
+            }
+        })
     })
 }
 
 async function getUsers(callBack) {
-    var accounts = database.get("SELECT * FROM accounts", (error, result) => {
-        if (err) {
+    var accounts = db.get("SELECT * FROM accounts", (error, result) => {
+        if (error) {
             return callBack(null)
         }
-
+        console.log(accounts)
     })
 }
 
 async function addUser(username, password) {
     var result = new Promise((resolve, reject) => {
-        database.run("INSERT INTO accounts(username, password) VALUES(?, ?)", [username, password], (err) => {
-            if (err) {
-                reject(err)
+        db.run("INSERT INTO accounts(username, password) VALUES(?, ?)",[username, password], (err) => {
+            if(err) {
+                reject(err);
             }
             else {
-                resolve("Good")
+                resolve("good");
             }
         })
     })
-
-    var res = await result
-    return res
+    var res = await result;
+    return res;
 }
 
-function createAccount(username, password) {
-    var newUser = document.getElementById(email)
-    var newPass = document.getElementById(password)
-    var confirm = document.getElementById(confirmPassword)
+async function getColours(callBack) {
+    var colours = db.get("SELECT * FROM colours", (error, result) => {
+        if (error) {
+            return callBack(null)
+        }
+        console.log(colours)
+    })
+}
 
-    if (newPass == confirm) {
-        database.run("INSERT INTO accounts(username, password) VALUES(?, ?)", [newUser, newPass], (err) => {
-            if (err) {
-                reject(err)
+async function addColour(R, G, B) {
+    var result = new Promise((resolve, reject) => {
+        db.run("INSERT INTO colours(R, G, B) VALUES(?, ?, ?"),[R, G, B], (err) => {
+            if(err) {
+                reject(err);
             }
             else {
-                resolve("Good")
+                resolve("good")
             }
         }
-    }
+    })
+    var res = await result;
+    return res;
 }
 
-
-function login(username, password) {
-
-}
