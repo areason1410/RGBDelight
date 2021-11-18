@@ -10,7 +10,7 @@ const database = new sqlite3.Database('Database/accounts.sqlite3', (err) => {
 
 module.exports = {
     initialiseDatabase,
-    getUsers
+    getUsers,
 }
 
 async function initialiseDatabase() {
