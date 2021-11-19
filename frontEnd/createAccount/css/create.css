@@ -13,6 +13,7 @@
 
 * {
     font-family: 'Nunito Sans', sans-serif;
+    background-color: var(--background);
 }
 
 .email {
@@ -32,9 +33,6 @@
     background-color: #662483;
     color: #f6f7fb;
     margin: 12px;
-    -webkit-box-shadow: 0px 0px 10px 6px rgba(221, 216, 206, 0.27);
-    box-shadow: 0px 0px 10px 6px rgba(221, 216, 206, 0.27);
-
     line-height: 20px;
     padding: 4px;
     border-radius: 10px;
@@ -47,6 +45,14 @@
     display: inline-block;
 }
 
+
+/* .createAccount:hover {
+    background: #1C6EA4;
+}
+
+.createAccount:active {
+    background: #144E75;
+} */
 
 .login {
     border-radius: 60%;

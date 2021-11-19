@@ -1,1 +1,3 @@
-< createAccount onclick = "createAccount(username, pass)" > < /createAccount>
+document.getElementById("createAccount").addEventListener("click", function () {
+    alert("Hello World!");
+});
