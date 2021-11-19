@@ -1,4 +1,4 @@
-const database = require("../database");
+const db = require("../database");
 const express = require("express");
 //const { get } = require("./port");
 const router = express.Router();
@@ -13,4 +13,10 @@ router.post("addUser", async (reg, res) => {
     db.addUser(reg.body.username, reg.body.username);
 })
 
+router.post("/addUser", async (req, res) => {
+    db.addUser(req.body.username, req.body.password)
+    res.send("Complete")
+})
+
 module.exports = router;
+
