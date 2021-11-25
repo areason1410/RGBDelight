@@ -19,9 +19,21 @@
     background-color: var(--background);
     color: var(--iceWhite);
     font-family: 'Nunito Sans', sans-serif;
-    padding: 0;
-    margin: 0;
+    /* padding: 0;
+    margin: 0; */
     box-sizing: border-box;
+}
+
+.header{
+    display: flex;
+}
+
+.newRoom {
+    position: absolute ;
+    left: 1080px;
+    top: 20px;   
+    border-radius: 30px;
+    color: var(--purple);
 }
 
 .navBar {
@@ -37,4 +49,8 @@
     display: flex;
     flex-direction: column;
     max-height: 3.4rem;
+}
+
+.bedRoom {
+    display: flex;
 }
