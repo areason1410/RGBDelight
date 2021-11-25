@@ -85,6 +85,30 @@ namespace RGBDelightApp
             }
         }
 
+        /// <summary>
+        /// Creates a DataTemplate
+        /// </summary>
+        /// <returns></returns>
+        private DataTemplate ListViewDataTemplate()
+        {
+            DataTemplate listViewDataTemplate = new DataTemplate();
+            listViewDataTemplate.DataType = typeof(Room);
+
+            FrameworkElementFactory listViewElementFactory = new FrameworkElementFactory(typeof(StackPanel));
+            listViewElementFactory.Name = "listViewElementFactory";
+            listViewElementFactory.SetValue(StackPanel.OrientationProperty, Orientation.Vertical);
+
+            FrameworkElementFactory roomElementFactory = new FrameworkElementFactory(typeof(TextBlock));
+            roomElementFactory.SetBinding(TextBlock.TextProperty, new Binding("RoomName"));
+            roomElementFactory.SetValue(TextBlock.ToolTipProperty, "asdf");
+            listViewElementFactory.AppendChild(roomElementFactory);
+
+            listViewDataTemplate.VisualTree = listViewElementFactory;
+
+            return listViewDataTemplate;
+
+        }
+
 
         public MainWindow()
         {
@@ -95,7 +119,6 @@ namespace RGBDelightApp
             AddGridDefinition(GridDefinitions.Row, 1);
             AddGridDefinition(GridDefinitions.Row, 5);
             AddGridDefinition(GridDefinitions.Row, 1);
-
 
 
             TextBlock roomText = new TextBlock();
