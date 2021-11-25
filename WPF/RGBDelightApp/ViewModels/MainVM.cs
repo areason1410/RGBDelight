@@ -19,17 +19,17 @@ namespace RGBDelight.ViewModels
             _lightVM = new LightViewModel();
         }
 
-        public HouseViewModel Houses()
+        public HouseViewModel HouseVM()
         {
             return _houseVM;
         }
 
-        public RoomViewModel Rooms()
+        public RoomViewModel RoomVM()
         {
             return _roomVM;
         }
 
-        public LightViewModel Lights()
+        public LightViewModel LightVM()
         {
             return _lightVM;
         }

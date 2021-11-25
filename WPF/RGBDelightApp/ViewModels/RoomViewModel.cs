@@ -25,8 +25,15 @@ namespace RGBDelight.ViewModels
         }
 
         public ObservableCollection<LED> Lights(Room room)
-        {
-            return room.Lights;
+        { 
+            if(room != null)
+            {
+                return room.Lights;
+            }
+            else
+            {
+                return null;
+            }
         }
         public void ChangeRoomName(Room Room, string name)
         {

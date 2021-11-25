@@ -24,6 +24,7 @@ namespace RGBDelightApp
     public partial class MainWindow : Window
     {
         public MainVM mainVM;
+        public HouseViewModel houseVM;
 
 
         private enum GridDefinitions
@@ -86,10 +87,10 @@ namespace RGBDelightApp
         }
 
         /// <summary>
-        /// Creates a DataTemplate
+        /// Creates a DataTemplate finish this lol
         /// </summary>
         /// <returns></returns>
-        private DataTemplate ListViewDataTemplate()
+        private DataTemplate RoomsListViewDataTemplate()
         {
             DataTemplate listViewDataTemplate = new DataTemplate();
             listViewDataTemplate.DataType = typeof(Room);
@@ -109,11 +110,46 @@ namespace RGBDelightApp
 
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        private DataTemplate LightsListBoxDataTemplate()
+        {
+            DataTemplate gridViewDataTemplate = new DataTemplate();
+            gridViewDataTemplate.DataType = typeof(Room);
+
+            FrameworkElementFactory gridViewElementFactory = new FrameworkElementFactory(typeof(ListBox));
+            gridViewElementFactory.Name = "listViewElementFactory";
+            //gridViewElementFactory.SetValue(GridView.);
+
+            FrameworkElementFactory lightElementFactory = new FrameworkElementFactory(typeof(TextBlock));
+            lightElementFactory.SetBinding(TextBlock.TextProperty, new Binding("ID"));
+            lightElementFactory.SetValue(TextBlock.ToolTipProperty, "asdf");
+            gridViewElementFactory.AppendChild(lightElementFactory);
+
+            gridViewDataTemplate.VisualTree = gridViewElementFactory;
+
+            return gridViewDataTemplate;
+
+        }
+
 
         public MainWindow()
         {
             InitializeComponent();
             mainVM = new MainVM();
+
+
+
+            Room room1 = new Room("Room 1");
+            // mainVM.HouseVM().Rooms().Add(room1);
+            houseVM.AddRoom(room1);
+            Room room2 = new Room("Room 2");
+            houseVM.Rooms().Add(room2);
+            LED light1 = new LED(0, 0, 0);
+            //houseVM.rooms.ElementAt(0).Lights.Add(light1);
+            //mainVM.RoomVM().AddLight(room1, light1);
 
             AddGridDefinition(GridDefinitions.Column, 1, 2);
             AddGridDefinition(GridDefinitions.Row, 1);
@@ -138,12 +174,24 @@ namespace RGBDelightApp
             topDock.Children.Add(roomText);
             topDock.Children.Add(addRoomButton);
 
+            
+            ListView roomList = new ListView();
+            roomList.ItemTemplate = RoomsListViewDataTemplate();
+            roomList.ItemsSource = mainVM.HouseVM().Rooms();
+            Grid.SetRow(roomList, 1);
 
-
+            ListBox lightList = new ListBox();
+            lightList.ItemTemplate = LightsListBoxDataTemplate();
+            lightList.ItemsSource = mainVM.RoomVM().Lights(roomList.SelectedItem as Room);
+            Debug.WriteLine($"{roomList.SelectedItem} yea");
+            Grid.SetColumn(lightList, 1);
+            Grid.SetRow(lightList, 1);
 
 
             // View.Children.Add(test);
             View.Children.Add(topDock);
+            View.Children.Add(roomList);
+            View.Children.Add(lightList);
             View.ShowGridLines = true;
 
 
