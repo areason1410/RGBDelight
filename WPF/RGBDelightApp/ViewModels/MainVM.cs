@@ -7,17 +7,31 @@ using System.Threading.Tasks;
 
 namespace RGBDelight.ViewModels
 {
-    class MainVM
+    public class MainVM
     {
-        private LED _RGB;
+        private HouseViewModel _houseVM;
+        private RoomViewModel _roomVM;
+        private LightViewModel _lightVM;
         public MainVM()
         {
-            _RGB = new LED(0, 0, 0);
+            _houseVM = new HouseViewModel();
+            _roomVM = new RoomViewModel();
+            _lightVM = new LightViewModel();
         }
 
-        public void ChangeLedColour(byte r, byte g, byte b)
+        public HouseViewModel Houses()
         {
-            _RGB.RGB = new Tuple<byte, byte, byte>(r, g, b);
+            return _houseVM;
+        }
+
+        public RoomViewModel Rooms()
+        {
+            return _roomVM;
+        }
+
+        public LightViewModel Lights()
+        {
+            return _lightVM;
         }
     }
 }

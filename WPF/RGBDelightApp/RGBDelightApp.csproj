@@ -102,11 +102,5 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\RGBDelight\RGBDelight.csproj">
-      <Project>{6d9c5102-4681-43ed-9d56-e183d5255143}</Project>
-      <Name>RGBDelight</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
