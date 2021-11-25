@@ -10,7 +10,8 @@ const database = new sqlite3.Database('Database/accounts.sqlite3', (err) => {
 
 module.exports = {
     initialiseDatabase,
-    getUsers
+    getUsers,
+    checkDetails
 }
 
 async function initialiseDatabase() {
@@ -30,17 +31,17 @@ async function initialiseDatabase() {
 }
 
 async function getUsers(callBack) {
-    var accounts = db.get("SELECT * FROM accounts", (error, result) => {
+    var accounts = database.get("SELECT * FROM accounts", (error, result) => {
         if (error) {
             return callBack(null)
         }
-        console.log(accounts)
+        callback(result);
     })
 }
 
 async function addUser(username, password) {
     var result = new Promise((resolve, reject) => {
-        db.run("INSERT INTO accounts(username, password) VALUES(?, ?)",[username, password], (err) => {
+        database.run("INSERT INTO accounts(username, password) VALUES(?, ?)",[username, password], (err) => {
             if(err) {
                 reject(err);
             }
@@ -54,17 +55,17 @@ async function addUser(username, password) {
 }
 
 async function getColours(callBack) {
-    var colours = db.get("SELECT * FROM colours", (error, result) => {
+    var colours = database.get("SELECT * FROM colours", (error, result) => {
         if (error) {
             return callBack(null)
         }
-        console.log(colours)
+        callback(result);
     })
 }
 
 async function addColour(R, G, B) {
     var result = new Promise((resolve, reject) => {
-        db.run("INSERT INTO colours(R, G, B) VALUES(?, ?, ?"),[R, G, B], (err) => {
+        database.run("INSERT INTO colours(R, G, B) VALUES(?, ?, ?"),[R, G, B], (err) => {
             if(err) {
                 reject(err);
             }
@@ -77,3 +78,14 @@ async function addColour(R, G, B) {
     return res;
 }
 
+async function checkDetails(username, callback) {
+    var account = database.get("SELECT username, password FROM accounts WHERE username == ?", username, (err, result) => {
+        if(err) {
+            return callback(null);
+        }
+        else {
+            callback(result);
+        }
+        
+    })
+}
