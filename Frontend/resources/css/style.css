@@ -36,19 +36,47 @@
     color: var(--purple);
 }
 
+.rooms {
+    display: flex;
+    flex-direction: column;
+    border: 3rem;
+    border-color: var(--fog);
+    justify-content: center;
+}
+
+.kitchen {
+    display: flex;
+}
+
+
 .navBar {
     position: fixed;
     bottom: 0;
     width: 100%;  
-    display: flex;
+    display: flex; 
     justify-content: space-evenly;
-    background-color: var(--nav);
+    background-color: var(--nav);     
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    width: 100%;
+    text-align: center;
+    z-index: 100;
+    padding: 0;
 }
 
 .navButton {
     display: flex;
     flex-direction: column;
     max-height: 3.4rem;
+    cursor: pointer;
 }
 
 .bedRoom {
