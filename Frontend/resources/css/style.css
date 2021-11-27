@@ -1,84 +1,132 @@
-@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans&display=swap");
 
 :root {
-    --blue: #00bae7;
-    --green: #00c142;
-    --orange: #e9b80d;
-    --purple: #b200c1;
-    --background: #222222;
-    --iceWhite: #f6f7fb;
-    --nav: #1d1d1d;
-    --skyBlue: #2da7ff;
-    --deepSea: #0e71b8;
-    --fog: #bfdbf7;
-    --blueBlack: #081f2f;
-    --emphesis: #4e1b63;
+  --blue: #00bae7;
+  --green: #00c142;
+  --orange: #e9b80d;
+  --purple: #b200c1;
+  --background: #222222;
+  --iceWhite: #f6f7fb;
+  --nav: #1d1d1d;
+  --skyBlue: #2da7ff;
+  --deepSea: #0e71b8;
+  --fog: #bfdbf7;
+  --blueBlack: #081f2f;
+  --emphesis: #4e1b63;
 }
 
 * {
-    background-color: var(--background);
-    color: var(--iceWhite);
-    font-family: 'Nunito Sans', sans-serif;
-    /* padding: 0;
+  background-color: var(--background);
+  color: var(--iceWhite);
+  font-family: "Nunito Sans", sans-serif;
+  /* padding: 0;
     margin: 0; */
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
-.header{
-    display: flex;
+.header {
+  display: flex;
 }
 
 .newRoom {
-    position: absolute ;
-    left: 1080px;
-    top: 20px;   
-    border-radius: 30px;
-    color: var(--purple);
+  position: absolute;
+  left: 1080px;
+  top: 20px;
+  border-radius: 30px;
+  color: var(--purple);
 }
 
 .rooms {
-    display: flex;
-    flex-direction: column;
-    border: 3rem;
-    border-color: var(--fog);
-    justify-content: center;
+  display: flex;
+  flex-direction: column;
+  border: 3rem;
+  border-color: var(--fog);
+  justify-content: center;
 }
 
-.kitchen {
-    display: flex;
-}
-
-
-.navBar {
-    position: fixed;
-    bottom: 0;
-    width: 100%;  
-    display: flex; 
-    justify-content: space-evenly;
-    background-color: var(--nav);     
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-orient: horizontal;
-    -webkit-box-direction: normal;
-        -ms-flex-direction: row;
-            flex-direction: row;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
-    width: 100%;
-    text-align: center;
-    z-index: 100;
-    padding: 0;
-}
-
-.navButton {
-    display: flex;
-    flex-direction: column;
-    max-height: 3.4rem;
-    cursor: pointer;
+.roomCard {
+  display: flex;
+  justify-content: center;
 }
 
 .bedRoom {
-    display: flex;
+  background-color: #e9b80d;
+  width: 80%;
+  justify-content: center;
+  border-radius: 5px;
+  align-items: center;
+}
+
+.bedRoomName {
+  display: flex;
+  background-color: #e9b80d;
+  justify-content: center;
+}
+
+.imgBed {
+  background-color: #e9b80d;
+  display: flex;
+}
+
+.lightsComp {
+  background-color: #e9b80d;
+  align-items: center;
+}
+
+.lights {
+  background-color: #e9b80d;
+}
+
+.imgLights {
+  display: flex;
+  background-color: #e9b80d;
+  justify-content: center;
+}
+
+.light {
+  background-color: #e9b80d;
+  display: flex;
+  justify-content: center;
+}
+
+.presetText {
+  background-color: #e9b80d;
+}
+
+.kitchen {
+  display: flex;
+}
+
+.navBar {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  background-color: var(--nav);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: 100%;
+  text-align: center;
+  z-index: 100;
+  padding: 0;
+}
+
+.navButton {
+  display: flex;
+  flex-direction: column;
+  max-height: 3.4rem;
+  cursor: pointer;
+}
+
+.bedRoom {
+  display: flex;
 }
