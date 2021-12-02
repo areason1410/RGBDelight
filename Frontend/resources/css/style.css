@@ -24,16 +24,29 @@
   box-sizing: border-box;
 }
 
+body{
+  overflow-x: hidden;
+
+}
+
 .header {
   display: flex;
 }
 
+.createRoom {
+  display: flex;
+  justify-content: left;
+  flex-direction: column;
+}
+
 .newRoom {
-  position: absolute;
+  /* position: absolute;
   left: 1080px;
   top: 20px;
-  border-radius: 30px;
+  border-radius: 30px; */
   color: var(--purple);
+  background-color: #2da7ff;
+  margin: 3rem;
 }
 
 .rooms {
