@@ -1,11 +1,8 @@
-C:\Users\Aaron\Desktop\RGBDelight\WPF\RGBDelightApp\obj\Debug\RGBDelightApp.csproj.AssemblyReference.cache
 C:\Users\Aaron\Desktop\RGBDelight\WPF\RGBDelightApp\obj\Debug\App.g.cs
 C:\Users\Aaron\Desktop\RGBDelight\WPF\RGBDelightApp\obj\Debug\RGBDelightApp_MarkupCompile.cache
 C:\Users\Aaron\Desktop\RGBDelight\WPF\RGBDelightApp\bin\Debug\RGBDelightApp.exe.config
 C:\Users\Aaron\Desktop\RGBDelight\WPF\RGBDelightApp\bin\Debug\RGBDelightApp.exe
 C:\Users\Aaron\Desktop\RGBDelight\WPF\RGBDelightApp\bin\Debug\RGBDelightApp.pdb
-C:\Users\Aaron\Desktop\RGBDelight\WPF\RGBDelightApp\bin\Debug\RGBDelight.dll
-C:\Users\Aaron\Desktop\RGBDelight\WPF\RGBDelightApp\bin\Debug\RGBDelight.pdb
 C:\Users\Aaron\Desktop\RGBDelight\WPF\RGBDelightApp\obj\Debug\MainWindow.g.cs
 C:\Users\Aaron\Desktop\RGBDelight\WPF\RGBDelightApp\obj\Debug\RGBDelightApp_MarkupCompile.lref
 C:\Users\Aaron\Desktop\RGBDelight\WPF\RGBDelightApp\obj\Debug\MainWindow.baml
@@ -13,7 +10,6 @@ C:\Users\Aaron\Desktop\RGBDelight\WPF\RGBDelightApp\obj\Debug\RGBDelightApp.g.re
 C:\Users\Aaron\Desktop\RGBDelight\WPF\RGBDelightApp\obj\Debug\RGBDelightApp.Properties.Resources.resources
 C:\Users\Aaron\Desktop\RGBDelight\WPF\RGBDelightApp\obj\Debug\RGBDelightApp.csproj.GenerateResource.cache
 C:\Users\Aaron\Desktop\RGBDelight\WPF\RGBDelightApp\obj\Debug\RGBDelightApp.csproj.CoreCompileInputs.cache
-C:\Users\Aaron\Desktop\RGBDelight\WPF\RGBDelightApp\obj\Debug\RGBDelightApp.csproj.CopyComplete
 C:\Users\Aaron\Desktop\RGBDelight\WPF\RGBDelightApp\obj\Debug\RGBDelightApp.exe
 C:\Users\Aaron\Desktop\RGBDelight\WPF\RGBDelightApp\obj\Debug\RGBDelightApp.pdb
 C:\Users\Aaron\Desktop\test\RGBDelight\WPF\RGBDelightApp\bin\Debug\RGBDelightApp.exe.config
@@ -31,3 +27,4 @@ C:\Users\Aaron\Desktop\test\RGBDelight\WPF\RGBDelightApp\obj\Debug\RGBDelightApp
 C:\Users\Aaron\Desktop\test\RGBDelight\WPF\RGBDelightApp\obj\Debug\RGBDelightApp.csproj.CoreCompileInputs.cache
 C:\Users\Aaron\Desktop\test\RGBDelight\WPF\RGBDelightApp\obj\Debug\RGBDelightApp.exe
 C:\Users\Aaron\Desktop\test\RGBDelight\WPF\RGBDelightApp\obj\Debug\RGBDelightApp.pdb
+C:\Users\Aaron\Desktop\RGBDelight\WPF\RGBDelightApp\obj\Debug\RGBDelightApp.csprojAssemblyReference.cache

@@ -9,29 +9,49 @@ namespace RGBDelight.ViewModels
 {
     public class MainVM
     {
-        private HouseViewModel _houseVM;
-        private RoomViewModel _roomVM;
-        private LightViewModel _lightVM;
+
         public MainVM()
         {
-            _houseVM = new HouseViewModel();
-            _roomVM = new RoomViewModel();
-            _lightVM = new LightViewModel();
+            
         }
+        // private HouseViewModel _houseVM;
+        // private RoomViewModel _roomVM;
+        // private LightViewModel _lightVM;
+        // public MainVM()
+        // {
+        //     _houseVM = new HouseViewModel();
+        //     _roomVM = new RoomViewModel();
+        //     _lightVM = new LightViewModel();
+        // }
 
-        public HouseViewModel HouseVM()
-        {
-            return _houseVM;
-        }
+        // public HouseViewModel HouseVM()
+        // {
+        //     return _houseVM;
+        // }
 
-        public RoomViewModel RoomVM()
-        {
-            return _roomVM;
-        }
+        // public RoomViewModel RoomVM()
+        // {
+        //     return _roomVM;
+        // }
 
-        public LightViewModel LightVM()
-        {
-            return _lightVM;
-        }
+        // public LightViewModel LightVM()
+        // {
+        //     return _lightVM;
+        // }
+
+        // public void AddRoom(Room room)
+        // {
+        //     try
+        //     {
+        //         _houseVM.AddRoom(room);
+        //     }
+        //     catch (Exception)
+        //     {
+
+        //         throw;
+        //     }
+        // }
+
+        // public void 
     }
 }

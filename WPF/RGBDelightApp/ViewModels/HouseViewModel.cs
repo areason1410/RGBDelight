@@ -12,19 +12,27 @@ namespace RGBDelight.ViewModels
     {
 
         #region Properties
-        private House house = new House();
+        private House _house = new House();
+        private RoomViewModel _roomVM = new RoomViewModel();
         #endregion
         #region Methods
 
         public ObservableCollection<Room> Rooms()
         {
-            return house.Rooms;
+            return _house.Rooms;
+        }
+        
+        public Room Room(Room room)
+        {
+            int index = Rooms().IndexOf(room);
+            if(index == -1) return Rooms()[0];
+            return Rooms()[index];
         }
         public void AddRoom(Room Room)
         {
             try
             {
-                house.Rooms.Add(Room);
+                _house.Rooms.Add(Room);
             }
             catch (Exception)
             {
@@ -35,11 +43,11 @@ namespace RGBDelight.ViewModels
 
         public void RemoveRoom(Room Room)
         {
-            if(house.Rooms.Contains(Room))
+            if(_house.Rooms.Contains(Room))
             {
                 try
                 {
-                    house.Rooms.Remove(Room);
+                    _house.Rooms.Remove(Room);
                 }
                 catch (Exception)
                 {
@@ -48,6 +56,32 @@ namespace RGBDelight.ViewModels
                 }
             }
         }
+
+
+        public void AddLight(Room room, LED light)
+        {
+            try
+            {
+                 int index = Rooms().IndexOf(room);
+                 Rooms()[index].Lights.Add(light);
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
+        }
+        // public void AddLight(Room room, LED light)
+        // {
+        //     try
+        //     {
+        //         _roomVM.AddLight(room, light);
+        //     }
+        //     catch (Exception)
+        //     {
+        //         throw;
+        //     }
+        // }
         #endregion
     }
 }

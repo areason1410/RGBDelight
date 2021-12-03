@@ -21,15 +21,6 @@ namespace RGBDelight.Models
 
             }
         }
-
-        private string _roomName;
-
-        public string RoomName
-        {
-            get { return _roomName; }
-            set { _roomName = value; }
-        }
-
         public House()
         {
             _rooms = new ObservableCollection<Room>();

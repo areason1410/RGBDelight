@@ -138,16 +138,24 @@ namespace RGBDelightApp
         public MainWindow()
         {
             InitializeComponent();
-            mainVM = new MainVM();
+            //mainVM = new MainVM();
 
-
-
+            houseVM = new HouseViewModel();
+            //mainVM.RoomVM.roomList.Add
             Room room1 = new Room("Room 1");
-            // mainVM.HouseVM().Rooms().Add(room1);
-            houseVM.AddRoom(room1);
             Room room2 = new Room("Room 2");
-            houseVM.Rooms().Add(room2);
+
+            houseVM.AddRoom(room1);
+            houseVM.AddRoom(room2);
+            //houseVM.Rooms().Add(room1);
+            //houseVM.AddRoom(room1);
+            //Room room2 = new Room("Room 2");
+            //houseVM.Rooms().Add(room2);
             LED light1 = new LED(0, 0, 0);
+            LED light2 = new LED(0, 0, 0);
+
+            houseVM.AddLight(room1, light1);
+            houseVM.AddLight(room1, light2);
             //houseVM.rooms.ElementAt(0).Lights.Add(light1);
             //mainVM.RoomVM().AddLight(room1, light1);
 
@@ -177,12 +185,12 @@ namespace RGBDelightApp
             
             ListView roomList = new ListView();
             roomList.ItemTemplate = RoomsListViewDataTemplate();
-            roomList.ItemsSource = mainVM.HouseVM().Rooms();
+            roomList.ItemsSource = houseVM.Rooms();
             Grid.SetRow(roomList, 1);
 
             ListBox lightList = new ListBox();
             lightList.ItemTemplate = LightsListBoxDataTemplate();
-            lightList.ItemsSource = mainVM.RoomVM().Lights(roomList.SelectedItem as Room);
+            lightList.ItemsSource = houseVM.Room(roomList.SelectedItem as Room).Lights;
             Debug.WriteLine($"{roomList.SelectedItem} yea");
             Grid.SetColumn(lightList, 1);
             Grid.SetRow(lightList, 1);
