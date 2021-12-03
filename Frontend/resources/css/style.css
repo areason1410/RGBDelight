@@ -24,7 +24,7 @@
   box-sizing: border-box;
 }
 
-body{
+.body{
   overflow-x: hidden;
 
 }
@@ -55,12 +55,13 @@ body{
   border: 3rem;
   border-color: var(--fog);
   justify-content: center;
+  margin:auto;
 }
 
 .roomCard {
   display: flex;
   justify-content: center;
-}
+} 
 
 .bedRoom {
   background-color: #e9b80d;
@@ -68,7 +69,19 @@ body{
   justify-content: center;
   border-radius: 5px;
   align-items: center;
-}
+  display: flex;
+ }
+
+.kitchen {
+  background-color:var(--fog);
+  width: 80%;
+  justify-content: center;
+  border-radius: 5px;
+  align-items: center; 
+  display: flex;
+  margin: 5%;
+  color: #000000;
+} 
 
 .bedRoomName {
   display: flex;
@@ -76,7 +89,13 @@ body{
   justify-content: center;
 }
 
-.imgBed {
+.kitchenName {
+  display: flex;
+  background-color: var(--fog);
+  justify-content: center;
+}
+
+.bedRoom imgBed {
   background-color: #e9b80d;
   display: flex;
 }
@@ -104,10 +123,6 @@ body{
 
 .presetText {
   background-color: #e9b80d;
-}
-
-.kitchen {
-  display: flex;
 }
 
 .navBar {
@@ -138,8 +153,4 @@ body{
   flex-direction: column;
   max-height: 3.4rem;
   cursor: pointer;
-}
-
-.bedRoom {
-  display: flex;
 }
