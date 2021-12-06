@@ -40,10 +40,6 @@
 }
 
 .newRoom {
-  /* position: absolute;
-  left: 1080px;
-  top: 20px;
-  border-radius: 30px; */
   color: var(--purple);
   background-color: #2da7ff;
   margin: 3rem;
@@ -83,6 +79,28 @@
   color: #000000;
 } 
 
+.livingRoom {
+    background-color: #f477ff;
+    width: 80%;
+    justify-content: center;
+    border-radius: 5px;
+    align-items: center;
+    display: flex;
+    margin-bottom: 10%;
+}
+
+.imgBed {
+  background-color: #e9b80d;
+}
+
+.imgKit {
+  background-color: var(--fog);
+}
+
+.imgLiv{
+  background-color: #f477ff;
+}
+
 .bedRoomName {
   display: flex;
   background-color: #e9b80d;
@@ -93,36 +111,92 @@
   display: flex;
   background-color: var(--fog);
   justify-content: center;
+  color: #000000;
 }
 
-.bedRoom imgBed {
+.livRoomName {
+  display: flex;
+  background-color: #f477ff;
+  justify-content: center;
+  color: #000000;
+}
+
+.bedRoom {
   background-color: #e9b80d;
   display: flex;
 }
 
-.lightsComp {
+.bedLightsComp {
   background-color: #e9b80d;
   align-items: center;
 }
 
-.lights {
+.kitLightsComp {
+  background-color: var(--fog);
+  align-items: center;
+}
+
+.livLightsComp {
+  background-color: #f477ff;
+  align-items: center;
+}
+
+.bedLights {
   background-color: #e9b80d;
 }
 
-.imgLights {
+.kitLights {
+  background-color: var(--fog);
+}
+
+.livLights {
+  background-color: #f477ff;
+}
+
+.bedImgLights {
   display: flex;
   background-color: #e9b80d;
   justify-content: center;
 }
 
-.light {
+.kitImgLights {
+  display: flex;
+  background-color: var(--fog);
+  justify-content: center;
+}
+
+.livImgLights {
+  display: flex;
+  background-color: #f477ff;
+  justify-content:center;
+}
+
+.bedLight {
   background-color: #e9b80d;
   display: flex;
   justify-content: center;
 }
 
-.presetText {
+.kitLight {
+  background-color: var(--fog);
+}
+
+.livLight {
+  background-color: #f477ff;
+}
+
+.bedPresetText {
   background-color: #e9b80d;
+}
+
+.kitPresetText {
+  background-color: var(--fog);
+  color: #000000;
+}
+
+.livPresetText {
+  background-color: #f477ff;
+  color: #000000;
 }
 
 .navBar {
@@ -154,3 +228,4 @@
   max-height: 3.4rem;
   cursor: pointer;
 }
+
