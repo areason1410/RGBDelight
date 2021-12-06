@@ -59,6 +59,7 @@
     <Compile Include="ViewModels\LightViewModel.cs" />
     <Compile Include="ViewModels\MainVM.cs" />
     <Compile Include="ViewModels\RoomViewModel.cs" />
+    <Compile Include="Views\AddRoomPopup.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

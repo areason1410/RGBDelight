@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using RGBDelight.ViewModels;
 using RGBDelight.Models;
+using RGBDelight.Views;
 using System.Diagnostics;
 
 namespace RGBDelightApp
@@ -24,7 +25,6 @@ namespace RGBDelightApp
     public partial class MainWindow : Window
     {
         public MainVM mainVM;
-        public HouseViewModel houseVM;
 
 
         private enum GridDefinitions
@@ -117,7 +117,7 @@ namespace RGBDelightApp
         private DataTemplate LightsListBoxDataTemplate()
         {
             DataTemplate gridViewDataTemplate = new DataTemplate();
-            gridViewDataTemplate.DataType = typeof(Room);
+            gridViewDataTemplate.DataType = typeof(LED);
 
             FrameworkElementFactory gridViewElementFactory = new FrameworkElementFactory(typeof(ListBox));
             gridViewElementFactory.Name = "listViewElementFactory";
@@ -134,30 +134,47 @@ namespace RGBDelightApp
 
         }
 
+        ListBox lightList = new ListBox();
+
+
+        private void roomSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ListView list = e.Source as ListView;
+            //list.SelectedItem
+            lightList.ItemsSource = (list.SelectedItem as Room).Lights;
+            
+        }
+
+
+       
+
+        private void addRoomButtonClicked(object sender, RoutedEventArgs e)
+        {
+            AddRoomPopup popup = new AddRoomPopup();
+            popup.ShowDialog();
+            mainVM.AddRoom(new Room("Room ayy"));
+        }
+
 
         public MainWindow()
         {
             InitializeComponent();
             //mainVM = new MainVM();
 
-            houseVM = new HouseViewModel();
+            mainVM = new MainVM();
             //mainVM.RoomVM.roomList.Add
             Room room1 = new Room("Room 1");
             Room room2 = new Room("Room 2");
 
-            houseVM.AddRoom(room1);
-            houseVM.AddRoom(room2);
-            //houseVM.Rooms().Add(room1);
-            //houseVM.AddRoom(room1);
-            //Room room2 = new Room("Room 2");
-            //houseVM.Rooms().Add(room2);
-            LED light1 = new LED(0, 0, 0);
-            LED light2 = new LED(0, 0, 0);
+            mainVM.AddRoom(room1);
+            mainVM.AddRoom(room2);
 
-            houseVM.AddLight(room1, light1);
-            houseVM.AddLight(room1, light2);
-            //houseVM.rooms.ElementAt(0).Lights.Add(light1);
-            //mainVM.RoomVM().AddLight(room1, light1);
+            LED light1 = new LED(23, 45, 122);
+            LED light2 = new LED(11, 1, 1);
+
+
+            mainVM.AddLight(room1, light1);
+            mainVM.AddLight(room1, light2);
 
             AddGridDefinition(GridDefinitions.Column, 1, 2);
             AddGridDefinition(GridDefinitions.Row, 1);
@@ -176,6 +193,7 @@ namespace RGBDelightApp
             Button addRoomButton = new Button();
             addRoomButton.Content = "+ Add Room";
             addRoomButton.HorizontalAlignment = HorizontalAlignment.Right;
+            addRoomButton.Click += new RoutedEventHandler(addRoomButtonClicked);
 
             DockPanel topDock = new DockPanel();
             Grid.SetColumnSpan(topDock, 2);
@@ -185,12 +203,16 @@ namespace RGBDelightApp
             
             ListView roomList = new ListView();
             roomList.ItemTemplate = RoomsListViewDataTemplate();
-            roomList.ItemsSource = houseVM.Rooms();
+            roomList.ItemsSource = mainVM.Rooms();
             Grid.SetRow(roomList, 1);
+            roomList.SelectionChanged += new SelectionChangedEventHandler(roomSelectionChanged);
 
-            ListBox lightList = new ListBox();
             lightList.ItemTemplate = LightsListBoxDataTemplate();
-            lightList.ItemsSource = houseVM.Room(roomList.SelectedItem as Room).Lights;
+            if (roomList.SelectedItem != null)
+            {
+                lightList.ItemsSource = (roomList.SelectedItem as Room).Lights;
+            }
+
             Debug.WriteLine($"{roomList.SelectedItem} yea");
             Grid.SetColumn(lightList, 1);
             Grid.SetRow(lightList, 1);
@@ -208,7 +230,5 @@ namespace RGBDelightApp
             DataContext = this;
             
         }
-
-       
     }
 }

@@ -36,8 +36,8 @@ namespace RGBDelight.Models
 
         public LED(byte r, byte g, byte b)
         {
-            _RGB = new Tuple<byte, byte, byte>(0, 0, 0);
-            _id = new Guid();
+            _RGB = new Tuple<byte, byte, byte>(r, g, b);
+            _id = Guid.NewGuid();
         }
 
 
