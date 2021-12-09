@@ -1,3 +1,5 @@
+
+
 const path = require("path");
 const express = require("express");
 const app = express();
@@ -5,7 +7,7 @@ const cors = require("cors")
 const database = require("./database")
 //routers
 //const portRouter = require("./routes/port");
-const accountRouter = require("./routes/databaseRoutes");
+const accountRouter = require("./routes/database");
 
 //use
 app.use(express.json());

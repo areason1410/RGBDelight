@@ -2,3 +2,36 @@
 
 GET http://localhost:3000/database/getUsers
 
+###
+
+POST http://localhost:3000/database/addUser
+Content-Type: application/json
+
+{
+    "username" : "benson",
+    "password" : "password123"
+}
+
+###
+
+POST http://localhost:3000/database/createAccount
+Content-Type: application/json
+###
+
+POST http://localhost:3000/database/verifyUser
+Content-Type: application/json
+
+{
+    "username": "benson",
+    "password": "password123"
+}
+
+###
+
+POST http://localhost:3000/database/changePassword
+Content-Type: application/json
+
+{
+    "username": "benson",
+    "password": "yesitworked"
+}
