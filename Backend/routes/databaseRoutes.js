@@ -20,16 +20,19 @@ router.post("/addUser", async (req, res) => {
 
 
 router.post("/verifyUser", async (req, res) => {
-    db.checkDetails(req.body.username, async(data) => {
-        if(data.password == req.body.password)
-        {
+    db.checkDetails(req.body.username, async (data) => {
+        if (data.password == req.body.password) {
             res.send("good Password");
         }
-        else
-        {
+        else {
             res.send("Incorrect Username or Password")
         }
     })
+})
+
+router.post("/changePassword", async (req, res) => {
+    db.changePassword(req.body.password, req.body.username);
+    res.send("changed password")
 })
 
 module.exports = router;

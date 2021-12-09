@@ -25,3 +25,13 @@ Content-Type: application/json
     "username": "benson",
     "password": "password123"
 }
+
+###
+
+POST http://localhost:3000/database/changePassword
+Content-Type: application/json
+
+{
+    "username": "benson",
+    "password": "yesitworked"
+}
