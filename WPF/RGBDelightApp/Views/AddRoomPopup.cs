@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,13 +13,14 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
+using RGBDelight.Models;
 namespace RGBDelight.Views
 {
     public class AddRoomPopup : Window
     {
         public Grid RootGrid { get; private set; }
-
+        public static string roomName;
+        private TextBox TextBox_Test;
         public AddRoomPopup()
         {
             this.WindowStyle = WindowStyle.ThreeDBorderWindow;
@@ -28,7 +30,7 @@ namespace RGBDelight.Views
 
             // Create a sqare grid with 20 pixel borders 
             this.RootGrid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(20) });
-            this.RootGrid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(200) });
+            this.RootGrid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(60) });
             this.RootGrid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(50) });
             this.RootGrid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(20) });
 
@@ -37,8 +39,8 @@ namespace RGBDelight.Views
             this.RootGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(20) });
 
             // Create a new Textbox and place it in the middle of the root grid
-            TextBox TextBox_Test = new TextBox()
-            { Text = "ABC", Background = Brushes.Yellow, HorizontalAlignment = HorizontalAlignment.Stretch, VerticalAlignment = VerticalAlignment.Top };
+            TextBox_Test = new TextBox()
+            { Text = "ABC", HorizontalAlignment = HorizontalAlignment.Stretch, VerticalAlignment = VerticalAlignment.Top };
 
             Grid.SetColumn(TextBox_Test, 1);
             Grid.SetRow(TextBox_Test, 1);
@@ -47,8 +49,8 @@ namespace RGBDelight.Views
             Grid GridForButtons = new Grid()
             { HorizontalAlignment = HorizontalAlignment.Stretch, VerticalAlignment = VerticalAlignment.Stretch };
 
-            Button Button_Close = new Button() { Content = "Close" };
-            Button_Close.Click += Button_Close_Click;
+            Button Button_Close = new Button() { Content = "Create Room" };
+            Button_Close.Click += Button_Create_Room;
 
             // Add the button to the grid which has one cell by default
             Grid.SetColumn(Button_Close, 0);
@@ -67,8 +69,9 @@ namespace RGBDelight.Views
             this.SizeToContent = SizeToContent.WidthAndHeight;
         }
 
-        private void Button_Close_Click(object sender, RoutedEventArgs e)
+        private void Button_Create_Room(object sender, RoutedEventArgs e)
         {
+            roomName = (TextBox_Test.Text != "" && TextBox_Test != null) ? roomName = TextBox_Test.Text : roomName = "New Room";
             this.Close();
         }
     }

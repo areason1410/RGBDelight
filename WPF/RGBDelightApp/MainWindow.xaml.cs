@@ -145,14 +145,17 @@ namespace RGBDelightApp
             
         }
 
-
        
 
         private void addRoomButtonClicked(object sender, RoutedEventArgs e)
         {
             AddRoomPopup popup = new AddRoomPopup();
             popup.ShowDialog();
-            mainVM.AddRoom(new Room("Room ayy"));
+            mainVM.AddRoom(new Room(AddRoomPopup.roomName));
+        }
+        private void addLightButtonClicked(object sender, RoutedEventArgs e)
+        {
+
         }
 
 
@@ -193,7 +196,7 @@ namespace RGBDelightApp
             Button addRoomButton = new Button();
             addRoomButton.Content = "+ Add Room";
             addRoomButton.HorizontalAlignment = HorizontalAlignment.Right;
-            addRoomButton.Click += new RoutedEventHandler(addRoomButtonClicked);
+            addRoomButton.Click += addRoomButtonClicked;
 
             DockPanel topDock = new DockPanel();
             Grid.SetColumnSpan(topDock, 2);
@@ -206,6 +209,7 @@ namespace RGBDelightApp
             roomList.ItemsSource = mainVM.Rooms();
             Grid.SetRow(roomList, 1);
             roomList.SelectionChanged += new SelectionChangedEventHandler(roomSelectionChanged);
+
 
             lightList.ItemTemplate = LightsListBoxDataTemplate();
             if (roomList.SelectedItem != null)
