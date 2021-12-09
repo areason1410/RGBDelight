@@ -13,8 +13,10 @@ let button3 = document.getElementById("settings").addEventListener("click", () =
 let button4 = document.getElementById("createRoom").addEventListener("click", () => {
     window.location.replace("newroom.html")
   })
-
-
+  
+let button5 = document.getElementsByClassName("bedRoom").addEventListener("click", () => {
+  window.location.replace("bedRoom.html")
+})
 
 
 
