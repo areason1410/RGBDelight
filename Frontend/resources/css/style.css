@@ -80,6 +80,15 @@
   display: flex;
  }
 
+#bedRoom {
+  background-color: #e9b80d;
+  width: 80%;
+  justify-content: center;
+  border-radius: 5px;
+  align-items: center;
+  display: flex;
+}
+
 .kitchen {
   background-color:var(--fog);
   width: 80%;
