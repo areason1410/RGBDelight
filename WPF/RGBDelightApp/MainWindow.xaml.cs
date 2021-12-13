@@ -110,6 +110,21 @@ namespace RGBDelightApp
 
         }
 
+        private ItemsPanelTemplate RoomListViewItemsPanelTemplate()
+        {
+            ItemsPanelTemplate itemsPanelTemplate = new ItemsPanelTemplate();
+            FrameworkElementFactory frameworkElementFactory = new FrameworkElementFactory(typeof(WrapPanel));
+            //frameworkElementFactory.SetValue(Grid.RowProperty, 3);
+            //frameworkElementFactory.SetValue(Grid.ColumnProperty, 3);
+            frameworkElementFactory.SetValue(WrapPanel.MaxWidthProperty, (double)200);
+            //frameworkElementFactory.SetValue(WrapPanel.HorizontalAlignmentProperty, HorizontalAlignment.Stretch);
+
+
+            itemsPanelTemplate.VisualTree = frameworkElementFactory;
+            return itemsPanelTemplate;
+
+        }
+
         /// <summary>
         /// 
         /// </summary>
@@ -179,7 +194,7 @@ namespace RGBDelightApp
             mainVM.AddLight(room1, light1);
             mainVM.AddLight(room1, light2);
 
-            AddGridDefinition(GridDefinitions.Column, 1, 2);
+            AddGridDefinition(GridDefinitions.Column, 1);
             AddGridDefinition(GridDefinitions.Row, 1);
             AddGridDefinition(GridDefinitions.Row, 5);
             AddGridDefinition(GridDefinitions.Row, 1);
@@ -199,7 +214,7 @@ namespace RGBDelightApp
             addRoomButton.Click += addRoomButtonClicked;
 
             DockPanel topDock = new DockPanel();
-            Grid.SetColumnSpan(topDock, 2);
+            Grid.SetColumnSpan(topDock, 1);
             topDock.Children.Add(roomText);
             topDock.Children.Add(addRoomButton);
 
@@ -207,6 +222,7 @@ namespace RGBDelightApp
             ListView roomList = new ListView();
             roomList.ItemTemplate = RoomsListViewDataTemplate();
             roomList.ItemsSource = mainVM.Rooms();
+            roomList.ItemsPanel = RoomListViewItemsPanelTemplate();
             Grid.SetRow(roomList, 1);
             roomList.SelectionChanged += new SelectionChangedEventHandler(roomSelectionChanged);
 
@@ -217,15 +233,14 @@ namespace RGBDelightApp
                 lightList.ItemsSource = (roomList.SelectedItem as Room).Lights;
             }
 
-            Debug.WriteLine($"{roomList.SelectedItem} yea");
-            Grid.SetColumn(lightList, 1);
-            Grid.SetRow(lightList, 1);
+            //Grid.SetColumn(lightList, 1);
+            //Grid.SetRow(lightList, 1);
 
 
             // View.Children.Add(test);
             View.Children.Add(topDock);
             View.Children.Add(roomList);
-            View.Children.Add(lightList);
+            //View.Children.Add(lightList);
             View.ShowGridLines = true;
 
 
