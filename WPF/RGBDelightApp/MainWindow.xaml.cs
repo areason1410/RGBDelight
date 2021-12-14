@@ -16,7 +16,6 @@ using RGBDelight.ViewModels;
 using RGBDelight.Models;
 using RGBDelight.Views;
 using System.Diagnostics;
-
 namespace RGBDelightApp
 {
     /// <summary>
@@ -25,66 +24,8 @@ namespace RGBDelightApp
     public partial class MainWindow : Window
     {
         public MainVM mainVM;
+        private utils utils;
 
-
-        private enum GridDefinitions
-        {
-            Row,
-            Column
-        }
-
-        #region Evidence
-        private void AddColumnDefinition(int width)
-        {
-            ColumnDefinition column = new ColumnDefinition();
-            GridLength size = new GridLength(width, GridUnitType.Star);
-            column.Width = size;
-            View.ColumnDefinitions.Add(column);
-        }
-
-        private void AddRowDefinition(int Height)
-        {
-            RowDefinition row = new RowDefinition();
-            GridLength size = new GridLength(Height, GridUnitType.Star);
-            row.Height = size;
-            View.RowDefinitions.Add(row);
-        }
-
-
-        #endregion
-
-        /// <summary>
-        /// Create a Row or Column definition and automatically add it to the grid
-        /// </summary>
-        /// <param name="definition">GridDefinitions Enum type so Row or Column</param>
-        /// <param name="val">Width or Height of the Column or Row (star values)</param>
-        /// <param name="count">How many copies of the definition to be made</param>
-        private void AddGridDefinition(GridDefinitions definition, int val, int count = 1)
-        {
-            GridLength size = new GridLength(val, GridUnitType.Star);
-
-            switch (definition)
-            {
-                case GridDefinitions.Row:
-                    for(int i = 0; i < count; i++)
-                    {
-                        RowDefinition row = new RowDefinition();
-                        row.Height = size;
-                        View.RowDefinitions.Add(row);
-                    }
-                    break;
-                case GridDefinitions.Column:
-                    for(int i = 0; i < count; i++)
-                    {
-                        ColumnDefinition column = new ColumnDefinition();
-                        column.Width = size;
-                        View.ColumnDefinitions.Add(column);
-                    }
-                    break;
-                default:
-                    break;
-            }
-        }
 
         /// <summary>
         /// Creates a DataTemplate finish this lol
@@ -110,14 +51,15 @@ namespace RGBDelightApp
 
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         private ItemsPanelTemplate RoomListViewItemsPanelTemplate()
         {
             ItemsPanelTemplate itemsPanelTemplate = new ItemsPanelTemplate();
             FrameworkElementFactory frameworkElementFactory = new FrameworkElementFactory(typeof(WrapPanel));
-            //frameworkElementFactory.SetValue(Grid.RowProperty, 3);
-            //frameworkElementFactory.SetValue(Grid.ColumnProperty, 3);
             frameworkElementFactory.SetValue(WrapPanel.MaxWidthProperty, (double)200);
-            //frameworkElementFactory.SetValue(WrapPanel.HorizontalAlignmentProperty, HorizontalAlignment.Stretch);
 
 
             itemsPanelTemplate.VisualTree = frameworkElementFactory;
@@ -156,7 +98,9 @@ namespace RGBDelightApp
         {
             ListView list = e.Source as ListView;
             //list.SelectedItem
-            lightList.ItemsSource = (list.SelectedItem as Room).Lights;
+            //lightList.ItemsSource = (list.SelectedItem as Room).Lights;
+            LightsView lightsView = new LightsView(mainVM, list.SelectedItem as Room);
+            lightsView.ShowDialog();
             
         }
 
@@ -180,6 +124,7 @@ namespace RGBDelightApp
             //mainVM = new MainVM();
 
             mainVM = new MainVM();
+            utils = new utils();
             //mainVM.RoomVM.roomList.Add
             Room room1 = new Room("Room 1");
             Room room2 = new Room("Room 2");
@@ -194,10 +139,10 @@ namespace RGBDelightApp
             mainVM.AddLight(room1, light1);
             mainVM.AddLight(room1, light2);
 
-            AddGridDefinition(GridDefinitions.Column, 1);
-            AddGridDefinition(GridDefinitions.Row, 1);
-            AddGridDefinition(GridDefinitions.Row, 5);
-            AddGridDefinition(GridDefinitions.Row, 1);
+            utils.AddGridDefinition(View, GridDefinitions.Column, 1);
+            utils.AddGridDefinition(View, GridDefinitions.Row, 1);
+            utils.AddGridDefinition(View, GridDefinitions.Row, 5);
+            utils.AddGridDefinition(View, GridDefinitions.Row, 1);
 
 
             TextBlock roomText = new TextBlock();
@@ -227,11 +172,11 @@ namespace RGBDelightApp
             roomList.SelectionChanged += new SelectionChangedEventHandler(roomSelectionChanged);
 
 
-            lightList.ItemTemplate = LightsListBoxDataTemplate();
-            if (roomList.SelectedItem != null)
-            {
-                lightList.ItemsSource = (roomList.SelectedItem as Room).Lights;
-            }
+            //lightList.ItemTemplate = LightsListBoxDataTemplate();
+            //if (roomList.SelectedItem != null)
+            //{
+            //    lightList.ItemsSource = (roomList.SelectedItem as Room).Lights;
+            //}
 
             //Grid.SetColumn(lightList, 1);
             //Grid.SetRow(lightList, 1);
