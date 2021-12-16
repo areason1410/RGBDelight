@@ -55,11 +55,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="ViewModels\utils.cs" />
+    <Compile Include="ViewModels\Utils.cs" />
     <Compile Include="ViewModels\HouseViewModel.cs" />
     <Compile Include="ViewModels\LightViewModel.cs" />
     <Compile Include="ViewModels\MainVM.cs" />
     <Compile Include="ViewModels\RoomViewModel.cs" />
+    <Compile Include="Views\AddLightPopup.cs" />
     <Compile Include="Views\LightsView.cs" />
     <Compile Include="Views\AddRoomPopup.cs" />
     <Page Include="MainWindow.xaml">

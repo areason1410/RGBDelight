@@ -5,18 +5,28 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 
-namespace RGBDelightApp
+namespace RGBDelight
 {
     public enum GridDefinitions
     {
         Row,
         Column
     }
-    public class utils
+
+    public struct Colours
+    {
+        public const string BackgroundDefault = "#222222";
+        public const string BackgroundDark = "#1D1D1D";
+    }
+
+
+
+    public class Utils
     {
 
-        public void AddColumnDefinition(Grid grid, int width)
+        public static void AddColumnDefinition(Grid grid, int width)
         {
             ColumnDefinition column = new ColumnDefinition();
             GridLength size = new GridLength(width, GridUnitType.Star);
@@ -24,7 +34,7 @@ namespace RGBDelightApp
             grid.ColumnDefinitions.Add(column);
         }
 
-        public void AddRowDefinition(Grid grid, int Height)
+        public static void AddRowDefinition(Grid grid, int Height)
         {
             RowDefinition row = new RowDefinition();
             GridLength size = new GridLength(Height, GridUnitType.Star);
@@ -32,7 +42,24 @@ namespace RGBDelightApp
             grid.RowDefinitions.Add(row);
         }
 
+        public static void SetupMainTemplate(MainWindow window)
+        {
+            window.WindowStyle = WindowStyle.None;
+            window.WindowState = WindowState.Maximized;
+            window.Background = Utils.GetBrush(Colours.BackgroundDark);
+        }
 
+
+        public static Brush GetBrush(string colourHex)
+        {
+            BrushConverter bc = new BrushConverter();
+
+            Brush brush = (Brush)bc.ConvertFrom(colourHex);
+
+            brush.Freeze();
+
+            return brush;
+        }
 
         /// <summary>
         /// Create a Row or Column definition and automatically add it to the grid
@@ -40,7 +67,7 @@ namespace RGBDelightApp
         /// <param name="definition">GridDefinitions Enum type so Row or Column</param>
         /// <param name="val">Width or Height of the Column or Row (star values)</param>
         /// <param name="count">How many copies of the definition to be made</param>
-        public void AddGridDefinition(Grid grid, GridDefinitions definition, int val, int count = 1)
+        public static void AddGridDefinition(Grid grid, GridDefinitions definition, int val, int count = 1)
         {
             GridLength size = new GridLength(val, GridUnitType.Star);
 

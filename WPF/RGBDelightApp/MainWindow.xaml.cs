@@ -16,7 +16,8 @@ using RGBDelight.ViewModels;
 using RGBDelight.Models;
 using RGBDelight.Views;
 using System.Diagnostics;
-namespace RGBDelightApp
+
+namespace RGBDelight
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -24,11 +25,13 @@ namespace RGBDelightApp
     public partial class MainWindow : Window
     {
         public MainVM mainVM;
-        private utils utils;
-
+        private double screenWidth = System.Windows.SystemParameters.WorkArea.Width;
+        private double screenHeight = System.Windows.SystemParameters.WorkArea.Height;
+        private Grid View;
 
         /// <summary>
         /// Creates a DataTemplate finish this lol
+        /// https://stackoverflow.com/questions/17828417/centering-text-vertically-and-horizontally-in-textblock-and-passwordbox-in-windo
         /// </summary>
         /// <returns></returns>
         private DataTemplate RoomsListViewDataTemplate()
@@ -36,16 +39,21 @@ namespace RGBDelightApp
             DataTemplate listViewDataTemplate = new DataTemplate();
             listViewDataTemplate.DataType = typeof(Room);
 
-            FrameworkElementFactory listViewElementFactory = new FrameworkElementFactory(typeof(StackPanel));
-            listViewElementFactory.Name = "listViewElementFactory";
-            listViewElementFactory.SetValue(StackPanel.OrientationProperty, Orientation.Vertical);
-
-            FrameworkElementFactory roomElementFactory = new FrameworkElementFactory(typeof(TextBlock));
-            roomElementFactory.SetBinding(TextBlock.TextProperty, new Binding("RoomName"));
+            FrameworkElementFactory roomElementFactory = new FrameworkElementFactory(typeof(Label));
+            roomElementFactory.SetBinding(Label.ContentProperty, new Binding("RoomName"));
             roomElementFactory.SetValue(TextBlock.ToolTipProperty, "asdf");
-            listViewElementFactory.AppendChild(roomElementFactory);
+            roomElementFactory.SetValue(TextBlock.MinWidthProperty, screenWidth / 7.5);
+            roomElementFactory.SetValue(TextBlock.MinHeightProperty, screenHeight / 10);
 
-            listViewDataTemplate.VisualTree = listViewElementFactory;
+           // roomElementFactory.SetValue(TextBlock.TextAlignmentProperty, TextAlignment.Center);
+            //roomElementFactory.SetValue(VerticalContentAlignment, VerticalContentAlignment.Center);
+
+            roomElementFactory.SetValue(VerticalContentAlignmentProperty, VerticalAlignment.Center);
+            roomElementFactory.SetValue(HorizontalContentAlignmentProperty, HorizontalAlignment.Center);
+            roomElementFactory.SetValue(Label.BackgroundProperty, Brushes.Gray);
+            roomElementFactory.SetValue(Label.ForegroundProperty, Brushes.White);
+
+            listViewDataTemplate.VisualTree = roomElementFactory;
 
             return listViewDataTemplate;
 
@@ -59,12 +67,24 @@ namespace RGBDelightApp
         {
             ItemsPanelTemplate itemsPanelTemplate = new ItemsPanelTemplate();
             FrameworkElementFactory frameworkElementFactory = new FrameworkElementFactory(typeof(WrapPanel));
-            frameworkElementFactory.SetValue(WrapPanel.MaxWidthProperty, (double)200);
-
+            frameworkElementFactory.SetValue(WrapPanel.MaxWidthProperty, screenWidth);
+            //frameworkElementFactory.SetValue(TextBlock.MarginProperty, new Thickness(50));
 
             itemsPanelTemplate.VisualTree = frameworkElementFactory;
             return itemsPanelTemplate;
 
+        }
+        /// <summary>
+        /// https://docs.microsoft.com/en-us/dotnet/api/system.windows.style.setters?view=windowsdesktop-6.0#System_Windows_Style_Setters
+        /// </summary>
+        /// <returns></returns>
+        private Style RoomListItemContainerStyle()
+        {
+            Style style = new Style();
+            style.TargetType = typeof(ListViewItem);
+            style.Setters.Add(new Setter(ListView.MarginProperty, new Thickness((screenWidth / 75))));
+
+            return style;
         }
 
         /// <summary>
@@ -99,8 +119,12 @@ namespace RGBDelightApp
             ListView list = e.Source as ListView;
             //list.SelectedItem
             //lightList.ItemsSource = (list.SelectedItem as Room).Lights;
-            LightsView lightsView = new LightsView(mainVM, list.SelectedItem as Room);
-            lightsView.ShowDialog();
+            if (list.SelectedIndex != -1)
+            {
+                LightsView lightsView = new LightsView(mainVM, list.SelectedItem as Room);
+                lightsView.ShowDialog();
+            }
+            list.SelectedIndex = -1;
             
         }
 
@@ -117,42 +141,15 @@ namespace RGBDelightApp
 
         }
 
-
-        public MainWindow()
+        private void drawRoomsPage()
         {
-            InitializeComponent();
-            //mainVM = new MainVM();
-
-            mainVM = new MainVM();
-            utils = new utils();
-            //mainVM.RoomVM.roomList.Add
-            Room room1 = new Room("Room 1");
-            Room room2 = new Room("Room 2");
-
-            mainVM.AddRoom(room1);
-            mainVM.AddRoom(room2);
-
-            LED light1 = new LED(23, 45, 122);
-            LED light2 = new LED(11, 1, 1);
-
-
-            mainVM.AddLight(room1, light1);
-            mainVM.AddLight(room1, light2);
-
-            utils.AddGridDefinition(View, GridDefinitions.Column, 1);
-            utils.AddGridDefinition(View, GridDefinitions.Row, 1);
-            utils.AddGridDefinition(View, GridDefinitions.Row, 5);
-            utils.AddGridDefinition(View, GridDefinitions.Row, 1);
-
-
             TextBlock roomText = new TextBlock();
-            //roomText.Name = "RoomText";
             roomText.Text = "Room";
             roomText.FontSize = 24;
             roomText.VerticalAlignment = VerticalAlignment.Center;
             Grid.SetColumn(roomText, 1);
             Grid.SetRow(roomText, 1);
-          
+
             Button addRoomButton = new Button();
             addRoomButton.Content = "+ Add Room";
             addRoomButton.HorizontalAlignment = HorizontalAlignment.Right;
@@ -162,35 +159,96 @@ namespace RGBDelightApp
             Grid.SetColumnSpan(topDock, 1);
             topDock.Children.Add(roomText);
             topDock.Children.Add(addRoomButton);
+            Grid.SetColumnSpan(topDock, 3);
 
-            
             ListView roomList = new ListView();
             roomList.ItemTemplate = RoomsListViewDataTemplate();
             roomList.ItemsSource = mainVM.Rooms();
             roomList.ItemsPanel = RoomListViewItemsPanelTemplate();
+            roomList.ItemContainerStyle = RoomListItemContainerStyle();
+            roomList.Background = Utils.GetBrush(Colours.BackgroundDefault);
             Grid.SetRow(roomList, 1);
             roomList.SelectionChanged += new SelectionChangedEventHandler(roomSelectionChanged);
+            Grid.SetColumnSpan(roomList, 3);
 
-
-            //lightList.ItemTemplate = LightsListBoxDataTemplate();
-            //if (roomList.SelectedItem != null)
-            //{
-            //    lightList.ItemsSource = (roomList.SelectedItem as Room).Lights;
-            //}
-
-            //Grid.SetColumn(lightList, 1);
-            //Grid.SetRow(lightList, 1);
-
-
-            // View.Children.Add(test);
             View.Children.Add(topDock);
             View.Children.Add(roomList);
-            //View.Children.Add(lightList);
+        }
+        
+        private void drawBottomBar()
+        {
+
+            //string[] content = new string[3] { "Scenes", "Main", "Settings" };
+
+            //for(int i = 0; i < 3; i++)
+            //{
+            //    Button button = new Button();
+            //    Grid.SetColumn(button, i);
+            //    Grid.SetRow(button, 3);
+            //    button.Content = content[i];
+
+
+            //    View.Children.Add(button);
+            //}
+
+            Button scenesPage = new Button();
+            Grid.SetRow(scenesPage, 3);
+            scenesPage.Content = "Scenes";
+            //scenesPage.
+            //Grid.SetRow(scenesPage, 3);
+
+            Button mainPage = new Button();
+            Grid.SetRow(mainPage, 3);
+            Grid.SetColumn(mainPage, 1);
+            mainPage.Content = "Main";
+
+
+            Button settingsPage = new Button();
+            Grid.SetRow(settingsPage, 3);
+            Grid.SetColumn(settingsPage, 2);
+            settingsPage.Content = "Settings";
+
+
+            View.Children.Add(scenesPage);
+            View.Children.Add(mainPage);
+            View.Children.Add(settingsPage);
+        }
+
+        public MainWindow()
+        {
+            InitializeComponent();
+
+            mainVM = new MainVM();
+            View = new Grid();
+
+            this.WindowStyle = WindowStyle.None;
+            this.WindowState = WindowState.Maximized;
+            this.Background = Utils.GetBrush(Colours.BackgroundDark);
+
+            Room room1 = new Room("Room 1");
+            Room room2 = new Room("Room 2");
+
+            mainVM.AddRoom(room1);
+            mainVM.AddRoom(room2);
+
+            LED light1 = new LED(23, 45, 122);
+            LED light2 = new LED(11, 1, 1);
+
+            mainVM.AddLight(room1, light1);
+            mainVM.AddLight(room1, light2);
+
+            Utils.AddGridDefinition(View, GridDefinitions.Column, 1, 3);
+            Utils.AddGridDefinition(View, GridDefinitions.Row, 1);
+            Utils.AddGridDefinition(View, GridDefinitions.Row, 5);
+            Utils.AddGridDefinition(View, GridDefinitions.Row, 1);
+
+            drawRoomsPage();
+
+            drawBottomBar();
+
             View.ShowGridLines = true;
 
-
-            //View.ColumnDefinitions.
-
+            this.Content = View;
             DataContext = this;
             
         }
