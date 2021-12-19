@@ -22,8 +22,8 @@ POST http://localhost:3000/database/verifyUser
 Content-Type: application/json
 
 {
-    "username": "benson",
-    "password": "password123"
+    "username": "Aaron",
+    "password": "Password123"
 }
 
 ###

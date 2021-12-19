@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-
+using System.Net;
+using Newtonsoft.Json;
 namespace RGBDelight
 {
     public enum GridDefinitions
@@ -19,9 +20,21 @@ namespace RGBDelight
     {
         public const string BackgroundDefault = "#222222";
         public const string BackgroundDark = "#1D1D1D";
+        public const string White = "#F6F7FB";
     }
 
+    public class AccountData
+    {
+        public string username { get; set; }
+        public string password { get; set; }
 
+        public AccountData(string user, string pass)
+        {
+            this.username = user;
+            this.password = pass;
+        }
+        public AccountData() { }
+    }
 
     public class Utils
     {
@@ -93,5 +106,38 @@ namespace RGBDelight
                     break;
             }
         }
+
+        /// <summary>
+        /// https://zetcode.com/csharp/getpostrequest/
+        /// </summary>
+        /// <param name="url"></param>
+        /// <returns></returns>
+        public static string PostRequest<T>(string url, T data)
+        {
+
+            WebRequest request = WebRequest.Create(url);
+            request.Method = "POST";
+
+            string jsonData = JsonConvert.SerializeObject(data);
+            byte[] byteArray = Encoding.UTF8.GetBytes(jsonData);
+
+            System.IO.Stream reqStream = request.GetRequestStream();
+            reqStream.Write(byteArray, 0, byteArray.Length);
+
+            request.ContentType = "application/json";
+           // request.ContentLength = byteArray.Length;
+
+            WebResponse response = request.GetResponse();
+            Console.WriteLine(((HttpWebResponse)response).StatusDescription);
+
+            System.IO.Stream respStream = response.GetResponseStream();
+
+            System.IO.StreamReader reader = new System.IO.StreamReader(respStream);
+
+            string finalResponse = reader.ReadToEnd();
+            return finalResponse;
+
+        }
+
     }
 }

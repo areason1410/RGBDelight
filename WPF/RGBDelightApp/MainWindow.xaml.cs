@@ -16,7 +16,7 @@ using RGBDelight.ViewModels;
 using RGBDelight.Models;
 using RGBDelight.Views;
 using System.Diagnostics;
-
+using Newtonsoft.Json;
 namespace RGBDelight
 {
     /// <summary>
@@ -28,6 +28,8 @@ namespace RGBDelight
         private double screenWidth = System.Windows.SystemParameters.WorkArea.Width;
         private double screenHeight = System.Windows.SystemParameters.WorkArea.Height;
         private Grid View;
+        private bool loggedIn = false; //set to false in production
+        private readonly string currentUsername;
 
         /// <summary>
         /// Creates a DataTemplate finish this lol
@@ -144,9 +146,11 @@ namespace RGBDelight
         private void drawRoomsPage()
         {
             TextBlock roomText = new TextBlock();
-            roomText.Text = "Room";
+            roomText.Text = "Rooms";
+            //roomText.Margin 
             roomText.FontSize = 24;
             roomText.VerticalAlignment = VerticalAlignment.Center;
+            roomText.Foreground = Utils.GetBrush(Colours.White);
             Grid.SetColumn(roomText, 1);
             Grid.SetRow(roomText, 1);
 
@@ -216,6 +220,14 @@ namespace RGBDelight
 
         public MainWindow()
         {
+            if(loggedIn == false)
+            {
+                LoginView login = new LoginView();
+                login.ShowDialog();
+                currentUsername = LoginView.currentUsername;
+                loggedIn = true;
+            }
+
             InitializeComponent();
 
             mainVM = new MainVM();
@@ -244,7 +256,7 @@ namespace RGBDelight
 
             drawRoomsPage();
 
-            drawBottomBar();
+            drawBottomBar();;
 
             View.ShowGridLines = true;
 

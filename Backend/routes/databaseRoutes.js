@@ -20,6 +20,7 @@ router.post("/addUser", async (req, res) => {
 
 
 router.post("/verifyUser", async (req, res) => {
+    console.log(req.body);
     db.checkDetails(req.body.username, async (data) => {
         if (data.password == req.body.password) {
             res.send("good Password");
