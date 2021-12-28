@@ -32,7 +32,7 @@ namespace RGBDelight.Views
 
         private void addLightButtonClicked(object sender, RoutedEventArgs e)
         {
-            AddRoomPopup popup = new AddRoomPopup();
+            AddLightPopup popup = new AddLightPopup();
             popup.ShowDialog();
             mainVM.AddLight(room, new LED(0,0,0));
         }
@@ -78,7 +78,9 @@ namespace RGBDelight.Views
         {
             ItemsPanelTemplate itemsPanelTemplate = new ItemsPanelTemplate();
             FrameworkElementFactory frameworkElementFactory = new FrameworkElementFactory(typeof(WrapPanel));
-            //frameworkElementFactory.SetValue(WrapPanel.MaxWidthProperty, screenWidth);
+            frameworkElementFactory.SetValue(WrapPanel.MaxWidthProperty, Constants.screenWidth);
+            frameworkElementFactory.SetValue(WrapPanel.OrientationProperty, Orientation.Vertical);
+            frameworkElementFactory.SetValue(WrapPanel.HorizontalAlignmentProperty, HorizontalAlignment.Center);
             //frameworkElementFactory.SetValue(TextBlock.MarginProperty, new Thickness(50));
 
             itemsPanelTemplate.VisualTree = frameworkElementFactory;
@@ -93,7 +95,7 @@ namespace RGBDelight.Views
         {
             Style style = new Style();
             style.TargetType = typeof(ListViewItem);
-            //style.Setters.Add(new Setter(ListView.MarginProperty, new Thickness((screenWidth / 75))));
+            style.Setters.Add(new Setter(ListView.MarginProperty, Constants.LightsViewMargin));
 
             return style;
         }
@@ -107,14 +109,38 @@ namespace RGBDelight.Views
             DataTemplate gridViewDataTemplate = new DataTemplate();
             gridViewDataTemplate.DataType = typeof(LED);
 
-            FrameworkElementFactory gridViewElementFactory = new FrameworkElementFactory(typeof(ListBox));
+            FrameworkElementFactory gridViewElementFactory = new FrameworkElementFactory(typeof(WrapPanel));
             gridViewElementFactory.Name = "listViewElementFactory";
-            //gridViewElementFactory.SetValue(GridView.);
+            gridViewElementFactory.SetValue(WrapPanel.OrientationProperty, Orientation.Vertical);
+            gridViewElementFactory.SetValue(WrapPanel.BackgroundProperty, Utils.GetBrush(Colours.White));
+            gridViewElementFactory.SetValue(WrapPanel.MinWidthProperty, Constants.screenWidth/2);
 
-            FrameworkElementFactory lightElementFactory = new FrameworkElementFactory(typeof(TextBlock));
-            lightElementFactory.SetBinding(TextBlock.TextProperty, new Binding("ID"));
+            FrameworkElementFactory row1 = new FrameworkElementFactory(typeof(Grid));
+            row1.SetValue(WrapPanel.MinWidthProperty, Constants.screenWidth / 2);
+            //row1.SetValue(WrapPanel.HorizontalAlignmentProperty, HorizontalAlignment.Right);
+
+
+
+            FrameworkElementFactory lightElementFactory = new FrameworkElementFactory(typeof(Label));
+            lightElementFactory.SetBinding(Label.ContentProperty, new Binding("ID"));
             lightElementFactory.SetValue(TextBlock.ToolTipProperty, "asdf");
-            gridViewElementFactory.AppendChild(lightElementFactory);
+            lightElementFactory.SetValue(Label.HorizontalAlignmentProperty, HorizontalAlignment.Center);
+            //lightElementFactory.SetValue(Label.MarginProperty, Constants.LightsViewLabelMargin);
+            row1.AppendChild(lightElementFactory);
+            
+
+            FrameworkElementFactory switchElementFactory = new FrameworkElementFactory(typeof(CheckBox));
+            switchElementFactory.SetValue(CheckBox.HorizontalAlignmentProperty, HorizontalAlignment.Right);
+            switchElementFactory.SetValue(CheckBox.MarginProperty, Constants.LightsViewLabelMargin);
+            //switchElementFactory.SetValue();
+            row1.AppendChild(switchElementFactory);
+
+
+            gridViewElementFactory.AppendChild(row1);
+
+            FrameworkElementFactory sliderElementFactory = new FrameworkElementFactory(typeof(Slider));
+            sliderElementFactory.SetValue(Slider.MinWidthProperty, Constants.screenWidth / 2);
+            gridViewElementFactory.AppendChild(sliderElementFactory);
 
             gridViewDataTemplate.VisualTree = gridViewElementFactory;
 

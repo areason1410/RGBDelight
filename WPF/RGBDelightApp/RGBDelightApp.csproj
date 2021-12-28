@@ -58,6 +58,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Models\Scene.cs" />
     <Compile Include="ViewModels\Utils.cs" />
     <Compile Include="ViewModels\HouseViewModel.cs" />
     <Compile Include="ViewModels\LightViewModel.cs" />

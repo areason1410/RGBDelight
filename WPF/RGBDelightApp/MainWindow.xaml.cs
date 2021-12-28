@@ -17,6 +17,8 @@ using RGBDelight.Models;
 using RGBDelight.Views;
 using System.Diagnostics;
 using Newtonsoft.Json;
+
+
 namespace RGBDelight
 {
     /// <summary>
@@ -25,11 +27,10 @@ namespace RGBDelight
     public partial class MainWindow : Window
     {
         public MainVM mainVM;
-        private double screenWidth = System.Windows.SystemParameters.WorkArea.Width;
-        private double screenHeight = System.Windows.SystemParameters.WorkArea.Height;
         private Grid View;
-        private bool loggedIn = false; //set to false in production
+        private bool loggedIn = true; //set to false in production
         private readonly string currentUsername;
+
 
         /// <summary>
         /// Creates a DataTemplate finish this lol
@@ -44,8 +45,8 @@ namespace RGBDelight
             FrameworkElementFactory roomElementFactory = new FrameworkElementFactory(typeof(Label));
             roomElementFactory.SetBinding(Label.ContentProperty, new Binding("RoomName"));
             roomElementFactory.SetValue(TextBlock.ToolTipProperty, "asdf");
-            roomElementFactory.SetValue(TextBlock.MinWidthProperty, screenWidth / 7.5);
-            roomElementFactory.SetValue(TextBlock.MinHeightProperty, screenHeight / 10);
+            roomElementFactory.SetValue(TextBlock.MinWidthProperty, Constants.screenWidth / 7.5);
+            roomElementFactory.SetValue(TextBlock.MinHeightProperty, Constants.screenHeight / 10);
 
            // roomElementFactory.SetValue(TextBlock.TextAlignmentProperty, TextAlignment.Center);
             //roomElementFactory.SetValue(VerticalContentAlignment, VerticalContentAlignment.Center);
@@ -69,7 +70,7 @@ namespace RGBDelight
         {
             ItemsPanelTemplate itemsPanelTemplate = new ItemsPanelTemplate();
             FrameworkElementFactory frameworkElementFactory = new FrameworkElementFactory(typeof(WrapPanel));
-            frameworkElementFactory.SetValue(WrapPanel.MaxWidthProperty, screenWidth);
+            frameworkElementFactory.SetValue(WrapPanel.MaxWidthProperty, Constants.screenWidth);
             //frameworkElementFactory.SetValue(TextBlock.MarginProperty, new Thickness(50));
 
             itemsPanelTemplate.VisualTree = frameworkElementFactory;
@@ -84,7 +85,7 @@ namespace RGBDelight
         {
             Style style = new Style();
             style.TargetType = typeof(ListViewItem);
-            style.Setters.Add(new Setter(ListView.MarginProperty, new Thickness((screenWidth / 75))));
+            style.Setters.Add(new Setter(ListView.MarginProperty, new Thickness((Constants.screenWidth / 75))));
 
             return style;
         }
@@ -145,14 +146,14 @@ namespace RGBDelight
 
         private void drawRoomsPage()
         {
-            TextBlock roomText = new TextBlock();
-            roomText.Text = "Rooms";
-            //roomText.Margin 
-            roomText.FontSize = 24;
-            roomText.VerticalAlignment = VerticalAlignment.Center;
-            roomText.Foreground = Utils.GetBrush(Colours.White);
-            Grid.SetColumn(roomText, 1);
-            Grid.SetRow(roomText, 1);
+            TextBlock pageText = new TextBlock();
+            pageText.Text = "Rooms";
+            pageText.Margin = Constants.TitleTextMargin;
+            pageText.FontSize = 24;
+            pageText.VerticalAlignment = VerticalAlignment.Center;
+            pageText.Foreground = Utils.GetBrush(Colours.White);
+            Grid.SetColumn(pageText, 1);
+            Grid.SetRow(pageText, 1);
 
             Button addRoomButton = new Button();
             addRoomButton.Content = "+ Add Room";
@@ -161,7 +162,7 @@ namespace RGBDelight
 
             DockPanel topDock = new DockPanel();
             Grid.SetColumnSpan(topDock, 1);
-            topDock.Children.Add(roomText);
+            topDock.Children.Add(pageText);
             topDock.Children.Add(addRoomButton);
             Grid.SetColumnSpan(topDock, 3);
 
@@ -178,7 +179,59 @@ namespace RGBDelight
             View.Children.Add(topDock);
             View.Children.Add(roomList);
         }
-        
+
+
+
+        private void drawScenesPage()
+        {
+            TextBlock pageText = new TextBlock();
+            pageText.Text = "Scenes";
+            pageText.Margin = Constants.TitleTextMargin;
+            pageText.FontSize = 24;
+            pageText.VerticalAlignment = VerticalAlignment.Center;
+            pageText.Foreground = Utils.GetBrush(Colours.White);
+            Grid.SetColumn(pageText, 1);
+            Grid.SetRow(pageText, 1);
+
+            Button addRoomButton = new Button();
+            addRoomButton.Content = "+ Add Room";
+            addRoomButton.HorizontalAlignment = HorizontalAlignment.Right;
+            addRoomButton.Click += addRoomButtonClicked;
+
+            DockPanel topDock = new DockPanel();
+            Grid.SetColumnSpan(topDock, 1);
+            topDock.Children.Add(pageText);
+            topDock.Children.Add(addRoomButton);
+            Grid.SetColumnSpan(topDock, 3);
+
+            ListView roomList = new ListView();
+            roomList.ItemTemplate = RoomsListViewDataTemplate();
+            roomList.ItemsSource = mainVM.Rooms();
+            roomList.ItemsPanel = RoomListViewItemsPanelTemplate();
+            roomList.ItemContainerStyle = RoomListItemContainerStyle();
+            roomList.Background = Utils.GetBrush(Colours.BackgroundDefault);
+            Grid.SetRow(roomList, 1);
+            roomList.SelectionChanged += new SelectionChangedEventHandler(roomSelectionChanged);
+            Grid.SetColumnSpan(roomList, 3);
+
+            View.Children.Add(topDock);
+            View.Children.Add(roomList);
+        }
+
+
+        private void roomsPageButtonClicked(object sender, RoutedEventArgs e)
+        {
+            View.Children.Clear();
+            drawRoomsPage();
+            drawBottomBar();
+        }
+        private void scenesPageButtonClicked(object sender, RoutedEventArgs e)
+        {
+            View.Children.Clear();
+            drawScenesPage();
+            drawBottomBar();
+        }
+
         private void drawBottomBar()
         {
 
@@ -198,13 +251,15 @@ namespace RGBDelight
             Button scenesPage = new Button();
             Grid.SetRow(scenesPage, 3);
             scenesPage.Content = "Scenes";
+            scenesPage.Click += scenesPageButtonClicked;
             //scenesPage.
             //Grid.SetRow(scenesPage, 3);
 
-            Button mainPage = new Button();
-            Grid.SetRow(mainPage, 3);
-            Grid.SetColumn(mainPage, 1);
-            mainPage.Content = "Main";
+            Button roomsPage = new Button();
+            Grid.SetRow(roomsPage, 3);
+            Grid.SetColumn(roomsPage, 1);
+            roomsPage.Content = "Main";
+            roomsPage.Click += roomsPageButtonClicked;
 
 
             Button settingsPage = new Button();
@@ -214,7 +269,7 @@ namespace RGBDelight
 
 
             View.Children.Add(scenesPage);
-            View.Children.Add(mainPage);
+            View.Children.Add(roomsPage);
             View.Children.Add(settingsPage);
         }
 

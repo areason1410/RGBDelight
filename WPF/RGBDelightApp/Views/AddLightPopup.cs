@@ -71,7 +71,7 @@ namespace RGBDelight.Views
 
         private void Button_Create_Room(object sender, RoutedEventArgs e)
         {
-            lightName = (TextBox_Test.Text != "" && TextBox_Test != null) ? lightName = TextBox_Test.Text : lightName = "New Room";
+            lightName = (TextBox_Test.Text != "" && TextBox_Test != null) ? lightName = TextBox_Test.Text : lightName = "New Light";
             this.Close();
         }
     }

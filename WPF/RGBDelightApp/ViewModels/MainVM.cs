@@ -21,6 +21,11 @@ namespace RGBDelight.ViewModels
             return _house.Rooms;
         }
 
+        public ObservableCollection<Scene> Scenes()
+        {
+            return _house.Scenes;
+        }
+
         public Room GetRoom(Room room)
         {
             if(_house.Rooms.Contains(room))

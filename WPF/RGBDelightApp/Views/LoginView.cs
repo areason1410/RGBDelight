@@ -22,12 +22,12 @@ namespace RGBDelight.Views
     {
         public Grid RootGrid { get; private set; }
         private TextBox username;
-        private TextBox password;
+        private PasswordBox password;
         public static string currentUsername;
 
         private void LoginButtonPressed(object sender, RoutedEventArgs e)
         {
-            AccountData data = new AccountData(username.Text, password.Text);
+            AccountData data = new AccountData(username.Text, password.Password);
             string resp = Utils.PostRequest("http://localhost:3000/database/verifyUser", data);
             if (resp == "good Password")
             {
@@ -61,7 +61,7 @@ namespace RGBDelight.Views
             username = new TextBox();
             username.KeyDown += Username_KeyDown;
 
-            password = new TextBox();
+            password = new PasswordBox();
             password.KeyDown += Password_KeyDown;
 
 

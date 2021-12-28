@@ -1,14 +1,11 @@
 {
   "ExpandedNodes": [
     "",
-    "\\Backend\\Database",
-    "\\Frontend\\resources",
-    "\\Frontend\\resources\\css",
-    "\\Frontend\\resources\\JS",
     "\\WPF",
     "\\WPF\\RGBDelightApp",
+    "\\WPF\\RGBDelightApp\\ViewModels",
     "\\WPF\\RGBDelightApp\\Views"
   ],
-  "SelectedNode": "\\WPF\\RGBDelightApp\\MainWindow.xaml.cs",
+  "SelectedNode": "\\WPF\\RGBDelightApp\\Views\\LightsView.cs",
   "PreviewInSolutionExplorer": false
 }
