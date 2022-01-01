@@ -76,7 +76,7 @@ namespace RGBDelight.Views
 
 
             RootGrid.Children.Add(mainStack);
-            RootGrid.ShowGridLines = true;
+            //RootGrid.ShowGridLines = true;
             this.Content = RootGrid;
         }
 

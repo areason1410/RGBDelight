@@ -7,21 +7,10 @@ using System.Threading.Tasks;
 
 namespace RGBDelight.Models
 {
-    public class Scene : INPC
+    public class Scene : Room
     {
         #region Properties
-        private ObservableCollection<LED> _lights;
-
-        public ObservableCollection<LED> Lights
-        {
-            get { return _lights; }
-            set 
-            {
-                _lights = value;
-                OnPropertyChanged(nameof(Scene));
-            }
-        }
-
+       
         private string _sceneName;
         public string SceneName
         {
@@ -34,20 +23,9 @@ namespace RGBDelight.Models
             }
         }
 
-        private Guid _id;
-        public Guid ID
-        {
-            get { return _id; }
-            set 
-            { 
-                _id = value;
-                OnPropertyChanged(nameof(Scene));
-            }
-        }
-
         #endregion
         #region Constructors
-        public Scene(string sceneName)
+        public Scene(string sceneName) : base(sceneName)
         {
             _lights = new ObservableCollection<LED>();
             _sceneName = sceneName;

@@ -8,6 +8,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Net;
 using Newtonsoft.Json;
+using System.Windows.Media.Imaging;
 
 namespace RGBDelight
 {
@@ -17,138 +18,38 @@ namespace RGBDelight
         Column
     }
 
+    public enum PageType
+    {
+        Rooms,
+        Scenes,
+        Lights,
+        Settings,
+        Login
+    }
+
     public struct Colours
     {
         public const string BackgroundDefault = "#222222";
         public const string BackgroundDark = "#1D1D1D";
         public const string White = "#F6F7FB";
+        public const string Blue = "#2DA7FF";
     }
+
+    
 
     public struct Constants
     {
         public static double screenWidth = System.Windows.SystemParameters.WorkArea.Width;
         public static double screenHeight = System.Windows.SystemParameters.WorkArea.Height;
-        public static Thickness TitleTextMargin = new Thickness(20, 0, 0, 0);
+        public static double iconWidth = 30;
+        public static double iconHeight = 30;
+        public static double bottomBarFontSize = 16;
+        public static Thickness TitleTextMargin = new Thickness(Constants.screenWidth / 50, 0, 0, 0);
         public static Thickness LightsViewMargin = new Thickness(0, 30, 0, 0);
-        public static Thickness LightsViewLabelMargin = new Thickness(0, 0, screenWidth/10, 0);
+        public static Thickness LightsViewLabelMargin = new Thickness(0, 0, screenWidth / 10, 0);
+        public static Thickness AddButtonMargin = new Thickness(screenWidth / 50, screenHeight / 25, screenWidth / 50, screenHeight / 25);
+
     }
-
-    public static class ColorUtil
-    {
-        /// <summary>
-        /// Convert HSV to RGB
-        /// h is from 0-360
-        /// s,v values are 0-1
-        /// r,g,b values are 0-255
-        /// Based upon http://ilab.usc.edu/wiki/index.php/HSV_And_H2SV_Color_Space#HSV_Transformation_C_.2F_C.2B.2B_Code_2
-        /// </summary>
-        public static void HsvToRgb(double h, double S, double V, out byte r, out byte g, out byte b)
-        {
-            // ######################################################################
-            // T. Nathan Mundhenk
-            // mundhenk@usc.edu
-            // C/C++ Macro HSV to RGB
-
-            double H = h;
-            while (H < 0) { H += 360; };
-            while (H >= 360) { H -= 360; };
-            double R, G, B;
-            if (V <= 0)
-            { R = G = B = 0; }
-            else if (S <= 0)
-            {
-                R = G = B = V;
-            }
-            else
-            {
-                double hf = H / 60.0;
-                int i = (int)Math.Floor(hf);
-                double f = hf - i;
-                double pv = V * (1 - S);
-                double qv = V * (1 - S * f);
-                double tv = V * (1 - S * (1 - f));
-                switch (i)
-                {
-
-                    // Red is the dominant color
-
-                    case 0:
-                        R = V;
-                        G = tv;
-                        B = pv;
-                        break;
-
-                    // Green is the dominant color
-
-                    case 1:
-                        R = qv;
-                        G = V;
-                        B = pv;
-                        break;
-                    case 2:
-                        R = pv;
-                        G = V;
-                        B = tv;
-                        break;
-
-                    // Blue is the dominant color
-
-                    case 3:
-                        R = pv;
-                        G = qv;
-                        B = V;
-                        break;
-                    case 4:
-                        R = tv;
-                        G = pv;
-                        B = V;
-                        break;
-
-                    // Red is the dominant color
-
-                    case 5:
-                        R = V;
-                        G = pv;
-                        B = qv;
-                        break;
-
-                    // Just in case we overshoot on our math by a little, we put these here. Since its a switch it won't slow us down at all to put these here.
-
-                    case 6:
-                        R = V;
-                        G = tv;
-                        B = pv;
-                        break;
-                    case -1:
-                        R = V;
-                        G = pv;
-                        B = qv;
-                        break;
-
-                    // The color is not defined, we should throw an error.
-
-                    default:
-                        //LFATAL("i Value error in Pixel conversion, Value is %d", i);
-                        R = G = B = V; // Just pretend its black/white
-                        break;
-                }
-            }
-            r = Clamp((byte)(R * 255.0));
-            g = Clamp((byte)(G * 255.0));
-            b = Clamp((byte)(B * 255.0));
-        }
-
-        /// <summary>
-        /// Clamp a value to 0-255
-        /// </summary>
-        private static byte Clamp(byte i)
-        {
-            if (i < 0) return 0;
-            if (i > 255) return 255;
-            return i;
-        }
-    }
-
 
     public class AccountData
     {
@@ -255,7 +156,7 @@ namespace RGBDelight
            // request.ContentLength = byteArray.Length;
 
             WebResponse response = request.GetResponse();
-            Console.WriteLine(((HttpWebResponse)response).StatusDescription);
+            //Console.WriteLine(((HttpWebResponse)response).StatusDescription);
 
             System.IO.Stream respStream = response.GetResponseStream();
 
@@ -266,5 +167,48 @@ namespace RGBDelight
 
         }
 
+        public static string GetAbsolutePath(string relativePath)
+        {
+            string absolutePath;
+            absolutePath = $"{Environment.CurrentDirectory}\\{relativePath}";
+            return absolutePath;
+        }
+
+        /// <summary>
+        /// Given a path (and optionally a UriKind though absolute is recommended) loads an image from the given path so that it may be used 
+        /// in the program
+        /// </summary>
+        /// 
+        /// <param name="path"></param>
+        /// <param name="uriKind"></param>
+        /// 
+        /// <remarks> 
+        /// Cannot use svgs, use an online converter such as https://svgtopng.com 
+        /// </remarks>
+        /// 
+        /// <returns>
+        /// An image object that can be used to display images on the screen
+        /// </returns>
+        public static Image loadImage(string path, UriKind uriKind = UriKind.Absolute)
+        {
+            Image image = new Image();
+            Uri uri;
+
+            if (uriKind == UriKind.Relative)
+            {
+                uri = new Uri(GetAbsolutePath(path), uriKind);
+            }
+            else
+            {
+                uri = new Uri(path, uriKind); 
+            }
+
+            BitmapImage bitmap = new BitmapImage(uri);
+
+            image.Source = bitmap;
+
+            return image;
+            
+        }
     }
 }
