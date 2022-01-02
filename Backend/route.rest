@@ -8,7 +8,7 @@ POST http://localhost:3000/database/addUser
 Content-Type: application/json
 
 {
-    "username" : "benson",
+    "username" : "michael",
     "password" : "password123"
 }
 
@@ -33,5 +33,26 @@ Content-Type: application/json
 
 {
     "username": "benson",
-    "password": "yesitworked"
+    "password": "test"
+}
+
+###
+
+POST http://localhost:3000/database/changeEmail
+Content-Type: application/json
+
+{
+    "username" : "benson",
+    "newEmail" : "notBenson"
+}
+
+###
+
+POST http://localhost:3000/database/createRoom
+Content-Type: application/json
+
+{
+    "bulb" : "Hue",
+    "effect" : "fade",
+    "colour" : "#54a3e8"
 }

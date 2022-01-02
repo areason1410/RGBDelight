@@ -10,9 +10,12 @@ const database = new sqlite3.Database('Database/accounts.sqlite3', (err) => {
 
 module.exports = {
     initialiseDatabase,
+    addUser,
     getUsers,
     checkDetails,
-    changePassword
+    changePassword,
+    changeEmail,
+    createRoom
 }
 
 async function initialiseDatabase() {
@@ -28,6 +31,7 @@ async function initialiseDatabase() {
                 console.log(err)
             }
         })
+        database.run("CREATE TABLE IF NOT EXISTS rooms(bulb text, effect text, colour text)")
     })
 }
 
@@ -106,13 +110,37 @@ async function changePassword(password, username) {
     return res;
 }
 
-async function changeEmail() {
-
+async function changeEmail(username, newEmail) {
+    var result = new Promise((resolve, reject) => {
+        database.run("UPDATE accounts SET username = newEmail Where username = ?", (username, newEmail), (err) => {
+            if (err) {
+                reject(err)
+            }
+            else {
+                resolve("email changed")
+            }
+        })
+    })
+    var res = await result
+    return res
 }
 
 async function createRoom() {
-
+    var result = new Promise((resolve, reject) => {
+        database.run("INSERT INTO rooms(bulb, effect, colour) VALUES(?, ?)", [bulb, effect, colour], (err) => {
+            if (err) {
+                reject(err);
+            }
+            else {
+                resolve("good");
+            }
+        })
+    })
+    var res = await result;
+    return res;
 }
+
+
 
 async function createScene() {
 

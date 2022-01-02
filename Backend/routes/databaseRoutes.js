@@ -35,5 +35,15 @@ router.post("/changePassword", async (req, res) => {
     res.send("changed password")
 })
 
+router.post("/changeEmail", async (req, res) => {
+    db.changeEmail(req.body.username, req.body.newEmail)
+    res.send("changed Email")
+})
+
+router.post("/createRoom", async (req, res) => {
+    db.addUser(req.body.bulb, req.body.effect, req.body.colour)
+    res.send("Complete")
+})
+
 module.exports = router;
 
