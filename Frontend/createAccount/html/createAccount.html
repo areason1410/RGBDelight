@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="/frontEnd/createAccount/javascript/create.js"></script>
-    <script src="/routes/database.js"></script>
+    <script defer src="/frontEnd/createAccount/javascript/create.js"></script>
+    <!-- <script src="create.js"></script> -->
     <link rel="stylesheet" href="/frontEnd/createAccount/css/create.css">
 
 </head>
@@ -14,7 +14,7 @@
     <form>
         <div class="email">
             <label for="Email"></label>
-            <input type="text" placeholder="Email" id="email" name="email">
+            <input type="text" placeholder="Email" id="emailInput" name="email">
         </div>
         <div class="password">
             <label for="Password"></label>
@@ -27,7 +27,7 @@
         </div>
     </form>
 
-    <button class="createAccount">
+    <button class="createAccount" id="createAccount">
         createAccount
     </button>
     <div class="login">

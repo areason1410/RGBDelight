@@ -5,6 +5,8 @@ const emailInput = document.getElementById('email')
 const passwordInput = document.getElementById('password')
 const passwordConfirmInput = document.getElementById('confirmPassword')
 
+document.getElementsByClassName('button').addEventListener("click", createAccount(), homePage())
+
 function createAccount() {
     fetch("http://localhost:3000/database/addUser", {
         method: "POST",
@@ -18,3 +20,6 @@ function createAccount() {
     });
 }
 
+function homePage() {
+    location.href = "homePage.html"
+}
