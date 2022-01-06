@@ -1,4 +1,4 @@
-const db = require("../Database");
+const db = require("../database");
 const express = require("express");
 //const { get } = require("./port");
 const router = express.Router();
