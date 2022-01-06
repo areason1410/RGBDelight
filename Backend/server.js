@@ -12,6 +12,7 @@ const accountRouter = require("./routes/databaseRoutes");
 //use
 app.use(express.json());
 app.use(cors());
+app.use(express.static("../Frontend"));
 //app.use("/PortAPI", portRouter);
 app.use("/database", accountRouter)
 
