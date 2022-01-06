@@ -1,0 +1,60 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans&display=swap');
+
+:root {
+    --skyBlue: #2DA7FF;
+    --deepBlue: #0E71B8;
+    --fogBlue: #bfdbf7;
+    --black: #081F2F;
+    --purple: #4e1b63;
+    --offWhite: #f6f7fb;
+    --dullGrey: #808080;
+    --background: #222222;
+}
+
+* {
+    font-family: 'Nunito Sans', sans-serif;
+    background-color: var(--background);
+}
+
+.email {
+    font-size: 24px;
+    border-radius: 60%;
+}
+
+.password {
+    border-radius: 60%
+}
+
+.confirmPassword {
+    border-radius: 60%
+}
+
+.createAccount {
+    background-color: #662483;
+    color: #f6f7fb;
+    margin: 12px;
+    line-height: 20px;
+    padding: 4px;
+    border-radius: 10px;
+    font-size: 20px;
+    font-weight: normal;
+    text-decoration: none;
+    font-style: normal;
+    font-variant: normal;
+    text-transform: none;
+    display: inline-block;
+}
+
+
+/* .createAccount:hover {
+    background: #1C6EA4;
+}
+
+.createAccount:active {
+    background: #144E75;
+} */
+
+.login {
+    border-radius: 60%;
+    font-size: 16px
+}
