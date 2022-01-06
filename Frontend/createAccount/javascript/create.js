@@ -2,11 +2,11 @@ const emailInput = document.getElementById("emailInput");
 const password = document.getElementById("password")
 
 document.getElementById("createAccount").addEventListener("click", () => {
-    fetch("http://localhost:5502/database/addUser", {
+    fetch("http://localhost:3000/database/addUser", {
         method: "POST",
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-            "email": emailInput.value,
+            "username": emailInput.value,
             "password": password.value
         })
     }).then(res => {

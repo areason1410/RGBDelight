@@ -15,7 +15,8 @@ module.exports = {
     checkDetails,
     changePassword,
     changeEmail,
-    createRoom
+    createRoom,
+    addUser
 }
 
 async function initialiseDatabase() {
