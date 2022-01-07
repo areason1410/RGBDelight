@@ -14,13 +14,6 @@
 //     window.location.replace("newroom.html")
 //   })
   
-// let button5 = document.getElementsByClassName("bedRoom").addEventListener("click", () => {
-//   window.location.replace("bedRoom.html")
-// })
-
-// let button6 = document.getElementById("bedRoom").addEventListener("click", () => {
-//   window.location.replace("bedRoom.html")
-// })
 
 
 
