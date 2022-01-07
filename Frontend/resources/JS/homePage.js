@@ -33,7 +33,7 @@ rooms.forEach(room => {
   const roomCard = document.createElement("div");
   roomCard.classList.add("roomCard");
   roomCard.addEventListener("click", () => {
-    window.location.replace("")
+    window.location.href = "lights.html?roomName=" + room.name;
     
   })
 
