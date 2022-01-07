@@ -69,6 +69,14 @@
 .roomCard {
   display: flex;
   justify-content: center;
+  background-color:var(--fog);
+  width: 80%;
+  justify-content: center;
+  border-radius: 5px;
+  align-items: center; 
+  display: flex;
+  margin: 5%;
+  color: #000000;
 } 
 
 .bedRoom {
@@ -128,7 +136,7 @@
   justify-content: center;
 }
 
-.kitchenName {
+.roomName {
   display: flex;
   background-color: var(--fog);
   justify-content: center;
