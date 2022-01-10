@@ -66,7 +66,7 @@ router.get("/getRooms", async (req, res) => {
 })
 
 router.post("/applyLightChange", async (req, res) => {
-    db.applyLightChange(req.body);
+    db.applyLightChange(req.body)
     console.log("probsdone");
 })
 

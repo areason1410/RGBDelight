@@ -193,10 +193,24 @@ async function applyLightChange(e)
           }  
           else
           {
-              resolve("done")
+            //   fetch("http://localhost:3000/PortAPI/changeColour", {
+            //       method: "POST",
+            //       headers: { 'Content-Type': 'application/json' },
+            //       body: JSON.stringify({
+            //             "red": e.R,
+            //             "green": e.G,
+            //             "blue": e.B,
+            //           })
+            //       }).then( res => {
+            //         //resolve("done")
+
+            //       })
+                resolve("done");
           }
         });
     })
+    
+
 }
 async function createScene() {
 
