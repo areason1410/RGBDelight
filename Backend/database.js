@@ -18,7 +18,8 @@ module.exports = {
     createRoom,
     addUser,
     getRoom,
-    addBulb
+    addBulb,
+    getRooms
 }
 
 async function initialiseDatabase() {
@@ -143,13 +144,29 @@ async function addBulb() {
     return res;
 }
 
-async function getRoom(callback) {
+async function getRooms(callback) {
     var room = database.get("SELECT * FROM rooms", (error, result) => {
         if (error) {
             return callBack(null)
         }
         callback(result);
     })
+}
+
+async function getRoom(roomid, callback) {
+
+    var results = []
+
+    var room = database.all("SELECT * FROM bulbs WHERE RoomID = ?", roomid, (error, row) => {
+        if (error) {
+        }
+        //console.log(row);
+        results.push(row);
+        return callback(results);
+        //console.log(results);
+    })
+
+    // console.log(results);
 }
 
 

@@ -50,6 +50,13 @@ router.post("/addbulb", async (req, res) => {
     res.send("complete")
 })
 
+router.post("/getRoom", async (req, res) => {
+    db.getRoom(req.body.roomid, (data) => {
+        console.log(data);
+        res.send(data);
+    })
+})
+
 
 module.exports = router;
 
