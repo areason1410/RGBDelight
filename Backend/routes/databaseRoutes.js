@@ -41,7 +41,7 @@ router.post("/changeEmail", async (req, res) => {
 })
 
 router.post("/createRoom", async (req, res) => {
-    db.createRoom(req.body.roomid, req.body.roomname)
+    db.createRoom(req.body.roomname)
     res.send("Complete")
 })
 

@@ -89,6 +89,5 @@ Content-Type: application/json
 
 
 {
-        "roomid": 10,
         "roomname": "test"
 }

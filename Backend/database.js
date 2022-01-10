@@ -114,9 +114,23 @@ async function changeEmail(username, newEmail) {
     return res
 }
 
-async function createRoom(roomid, roomname) {
+async function createRoom(roomname) {
+
+    var getID = new Promise((resolve, reject) => {
+        let tempID = 0;
+
+        database.all("SELECT RoomID FROM rooms", (error, result) => {
+            result.forEach(id => {
+                if(tempID <= id.RoomID) tempID = id.RoomID+1;
+            })
+
+            resolve(tempID);
+        })
+    })
+    const newID = await getID;
+
     var result = new Promise((resolve, reject) => {
-        database.run("INSERT INTO rooms(RoomID, RoomName) VALUES(?, ?)", [roomid, roomname], (err) => {
+        database.run("INSERT INTO rooms(RoomID, RoomName) VALUES(?, ?)", [newID, roomname], (err) => {
             if (err) {
                 reject(err);
             }
