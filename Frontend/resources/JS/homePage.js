@@ -1,52 +1,60 @@
 
 
+const url = "http://localhost:3000/database/getRooms";
 
+fetch(url, {method: "GET",
+}).then(d => d.json()).then(res => {
+    res.forEach(room => {
+        const roomCard = document.createElement("div");
+        roomCard.classList.add("roomCard");
+        roomCard.addEventListener("click", () => {
+            window.location.href = "lights.html?roomID=" + room.RoomID;
 
-class Light {
-  constructor(id) {
-    this.id = id;
-    this.r = 255;
-    this.g = 255;
-    this.b = 255;
-  }
-}
+        })
 
-class room {
-
-
-  constructor(name) {
-    this.Lights = [new Light(1), new Light(2), new Light(3)]
-    this.name = name;
-  }
-}
-
-let room1 = new room("Bedroom");
-let room2 = new room("Kitchen");
-let room3 = new room("Living Room");
-
-let rooms = [room1, room2, room3];
-//console.log(room1.Lights);
-
-
-rooms.forEach(room => {
-  const roomCard = document.createElement("div");
-  roomCard.classList.add("roomCard");
-  roomCard.addEventListener("click", () => {
-    window.location.href = "lights.html?roomName=" + room.name;
-
-  })
-
-  const roomName = document.createElement("p");
-  roomName.classList.add("roomName")
-  roomName.innerText = room.name;
-  roomCard.appendChild(roomName);
+        const roomName = document.createElement("p");
+        roomName.classList.add("roomName")
+        roomName.innerText = room.RoomName;
+        roomCard.appendChild(roomName);
 
 
 
-  document.body.appendChild(roomCard);
+        document.body.appendChild(roomCard);
 
 
-});
+    })
+})
+
+//console.log(rooms);
+
+// class Light {
+//   constructor(id) {
+//     this.id = id;
+//     this.r = 255;
+//     this.g = 255;
+//     this.b = 255;
+//   }
+// }
+
+// class room {
+
+
+//   constructor(name) {
+//     this.Lights = [new Light(1), new Light(2), new Light(3)]
+//     this.name = name;
+//   }
+// }
+
+// let room1 = new room("Bedroom");
+// let room2 = new room("Kitchen");
+// let room3 = new room("Living Room");
+
+// //console.log(room1.Lights);
+
+
+// rooms.forEach(room => {
+  
+// });
 
 // var link = window.location.href;
 // link = link.replace("http://example.com/PageTwo.html?","");

@@ -145,24 +145,21 @@ async function addBulb() {
 }
 
 async function getRooms(callback) {
-    var room = database.get("SELECT * FROM rooms", (error, result) => {
+    var room = database.all("SELECT * FROM rooms", (error, result) => {
         if (error) {
-            return callBack(null)
+            //return callBack(null)
         }
-        callback(result);
+        return callback(result);
     })
 }
 
 async function getRoom(roomid, callback) {
 
-    var results = []
-
-    var room = database.all("SELECT * FROM bulbs WHERE RoomID = ?", roomid, (error, row) => {
+    var room = database.all("SELECT * FROM bulbs WHERE RoomID = ?", roomid, (error, result) => {
         if (error) {
         }
         //console.log(row);
-        results.push(row);
-        return callback(results);
+        return callback(result);
         //console.log(results);
     })
 

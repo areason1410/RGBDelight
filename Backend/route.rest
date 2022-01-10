@@ -76,3 +76,7 @@ Content-Type: application/json
 {
     "roomid" : "2"
 }
+###
+
+GET http://localhost:3000/database/getRooms
+Content-Type: application/json

@@ -58,5 +58,12 @@ router.post("/getRoom", async (req, res) => {
 })
 
 
+router.get("/getRooms", async (req, res) => {
+    db.getRooms((data) => {
+        console.log(data);
+        res.send(data);
+    })
+})
+
 module.exports = router;
 
