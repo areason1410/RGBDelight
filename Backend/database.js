@@ -162,7 +162,6 @@ async function addBulb() {
 async function getRooms(callback) {
     var room = database.all("SELECT * FROM rooms", (error, result) => {
         if (error) {
-            //return callBack(null)
         }
         return callback(result);
     })
@@ -173,12 +172,9 @@ async function getRoom(roomid, callback) {
     var room = database.all("SELECT * FROM bulbs WHERE RoomID = ?", roomid, (error, result) => {
         if (error) {
         }
-        //console.log(row);
         return callback(result);
-        //console.log(results);
     })
 
-    // console.log(results);
 }
 
 
@@ -187,26 +183,14 @@ async function applyLightChange(e)
     var result = new Promise((resolve, reject) => {
         let newData = [e.R, e.G, e.B, e.Brightness, e.state, e.RoomID, e.BulbID]
         database.run("UPDATE bulbs SET R = ?, G = ?, B = ?, Brightness = ?, state = ? WHERE RoomID = ? AND BulbID = ?", newData, (error) => {
-          if(error)
-          {
-              reject(error)
-          }  
-          else
-          {
-            //   fetch("http://localhost:3000/PortAPI/changeColour", {
-            //       method: "POST",
-            //       headers: { 'Content-Type': 'application/json' },
-            //       body: JSON.stringify({
-            //             "red": e.R,
-            //             "green": e.G,
-            //             "blue": e.B,
-            //           })
-            //       }).then( res => {
-            //         //resolve("done")
-
-            //       })
+            if(error)
+            {
+                reject(error)
+            }  
+            else
+            {
                 resolve("done");
-          }
+            }
         });
     })
     
