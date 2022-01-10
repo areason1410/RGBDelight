@@ -1,8 +1,10 @@
 {
   "ExpandedNodes": [
     "",
-    "\\WPF"
+    "\\WPF",
+    "\\WPF\\RGBDelightApp",
+    "\\WPF\\RGBDelightApp\\ViewModels"
   ],
-  "SelectedNode": "\\WPF\\RGBDelight.sln",
+  "SelectedNode": "\\WPF\\RGBDelightApp\\ViewModels\\MainVM.cs",
   "PreviewInSolutionExplorer": false
 }
