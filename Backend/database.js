@@ -20,6 +20,7 @@ module.exports = {
     getRoom,
     addBulb,
     getRooms,
+    applyLightChange
 }
 
 async function initialiseDatabase() {
@@ -181,7 +182,22 @@ async function getRoom(roomid, callback) {
 }
 
 
-
+async function applyLightChange(e)
+{
+    var result = new Promise((resolve, reject) => {
+        let newData = [e.R, e.G, e.B, e.Brightness, e.state, e.RoomID, e.BulbID]
+        database.run("UPDATE bulbs SET R = ?, G = ?, B = ?, Brightness = ?, state = ? WHERE RoomID = ? AND BulbID = ?", newData, (error) => {
+          if(error)
+          {
+              reject(error)
+          }  
+          else
+          {
+              resolve("done")
+          }
+        });
+    })
+}
 async function createScene() {
 
 }

@@ -89,5 +89,21 @@ Content-Type: application/json
 
 
 {
-        "roomname": "test"
+        "roomname": "test2"
+}
+
+###
+
+POST http://localhost:3000/database/applyLightChange
+Content-Type: application/json
+
+
+{
+    "R": 25,
+    "G": 26,
+    "B": 27,
+    "state": 1,
+    "Brightness": 100,
+    "RoomID": 2,
+    "BulbID": 1
 }
