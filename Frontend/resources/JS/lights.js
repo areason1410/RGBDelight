@@ -5,25 +5,15 @@ const applyUrl = "http://localhost:3000/database/applyLightChange"
 const portUrl = "http://localhost:3000/PortAPI/changeColour"
 
 
-var href = window.location.href;
 
-var dsplt = href.split("?");
-
-var urivars = dsplt[1].split("=");
-
-for (var i = 0; i < urivars.length; i++) {
-
-    urivars[i] = urivars[i].replace("%20", " ")
-}
-
-console.log(urivars.indexOf("roomID") + 1);
-const index = urivars.indexOf("roomID") + 1;
+var urlParams = new URLSearchParams(window.location.search);
+console.log(urlParams.get("roomID")); 
 
 fetch(url, {
     method: "POST",
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
-        "roomid": urivars[index],
+        "roomid": urlParams.get("roomID"),
     })
 }).then(d => d.json()).then(res => {
     res.forEach(light => {
@@ -92,7 +82,7 @@ fetch(url, {
                 .then(d => d.json()).then(res => {
                     console.log(res);
                 })
-                
+                //uncomment in production
                 // fetch(portUrl, {
                 //     method: "POST",
                 //     headers: { 'Content-Type': 'application/json' },
