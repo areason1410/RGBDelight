@@ -2,6 +2,7 @@
 
 const url = "http://localhost:3000/database/getRoom";
 const applyUrl = "http://localhost:3000/database/applyLightChange"
+const portUrl = "http://localhost:3000/PortAPI/changeColour"
 
 
 var href = window.location.href;
@@ -91,6 +92,19 @@ fetch(url, {
                 .then(d => d.json()).then(res => {
                     console.log(res);
                 })
+                
+                // fetch(portUrl, {
+                //     method: "POST",
+                //     headers: { 'Content-Type': 'application/json' },
+                //     body: JSON.stringify({
+                //           "red": r.value,
+                //           "green": g.value,
+                //           "blue": b.value
+                //         })
+                //     })
+                //     .then(d => d.json()).then(res => {
+                //         console.log("applied on bulb");
+                //     })
         })
         lightInfo.appendChild(button)
 

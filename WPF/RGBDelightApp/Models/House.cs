@@ -21,9 +21,23 @@ namespace RGBDelight.Models
 
             }
         }
+
+        private ObservableCollection<Scene> _scenes;
+
+        public ObservableCollection<Scene> Scenes
+        {
+            get { return _scenes; }
+            set
+            {
+                _scenes = value;
+                OnPropertyChanged(nameof(House));
+
+            }
+        }
         public House()
         {
             _rooms = new ObservableCollection<Room>();
+            _scenes = new ObservableCollection<Scene>();
         }
 
     }

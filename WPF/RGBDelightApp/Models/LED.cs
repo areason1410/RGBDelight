@@ -33,11 +33,21 @@ namespace RGBDelight.Models
             }
         }
 
+       
+        private int _brightness;
+
+        public int Brightness
+        {
+            get { return _brightness; }
+            set { _brightness = value; OnPropertyChanged(nameof(LED)); }
+        }
+
 
         public LED(byte r, byte g, byte b)
         {
             _RGB = new Tuple<byte, byte, byte>(r, g, b);
             _id = Guid.NewGuid();
+            _brightness = 100;
         }
 
 

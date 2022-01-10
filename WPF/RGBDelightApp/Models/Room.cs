@@ -10,7 +10,7 @@ namespace RGBDelight.Models
     public class Room : INPC
     {
         #region Properties
-        private ObservableCollection<LED> _lights;
+        private protected ObservableCollection<LED> _lights;
 
         public ObservableCollection<LED> Lights
         {
@@ -22,7 +22,7 @@ namespace RGBDelight.Models
             }
         }
 
-        private string _roomName;
+        private protected string _roomName;
         public string RoomName
         {
             get { return _roomName; }
@@ -34,7 +34,7 @@ namespace RGBDelight.Models
             }
         }
 
-        private Guid _id;
+        private protected Guid _id;
         public Guid ID
         {
             get { return _id; }
