@@ -1,0 +1,107 @@
+###
+
+GET http://localhost:3000/database/getUsers
+
+###
+
+POST http://localhost:3000/database/addUser
+Content-Type: application/json
+
+{
+    "username" : "michael",
+    "password" : "password123"
+}
+
+###
+
+POST http://localhost:3000/database/createAccount
+Content-Type: application/json
+###
+
+POST http://localhost:3000/database/verifyUser
+Content-Type: application/json
+
+{
+    "username": "benson",
+    "password": "password123"
+}
+
+###
+
+POST http://localhost:3000/database/changePassword
+Content-Type: application/json
+
+{
+    "username": "benson",
+    "password": "testing"
+}
+
+###
+
+POST http://localhost:3000/database/changeEmail
+Content-Type: application/json
+
+{
+    "username" : "benson",
+    "newEmail" : "notBenson"
+}
+
+###
+
+POST http://localhost:3000/database/createRoom
+Content-Type: application/json
+
+{
+    "id" : "abc",
+    "name" : "kitchen",
+    "bulbs" : "bulb2343"
+}
+
+###
+
+POST http://localhost:3000/database/addBulb
+Content-Type: application/json
+
+{
+    "RoomID": 2
+}
+
+###
+
+POST http://localhost:3000/database/getRoom
+Content-Type: application/json
+
+{
+    "roomid" : "2"
+}
+###
+
+GET http://localhost:3000/database/getRooms
+Content-Type: application/json
+
+
+###
+
+POST http://localhost:3000/database/createRoom
+Content-Type: application/json
+
+
+{
+        "roomname": "test2"
+}
+
+###
+
+POST http://localhost:3000/database/applyLightChange
+Content-Type: application/json
+
+
+{
+    "R": 25,
+    "G": 26,
+    "B": 27,
+    "state": 1,
+    "Brightness": 100,
+    "RoomID": 2,
+    "BulbID": 1
+}

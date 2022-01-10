@@ -1,0 +1,259 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans&display=swap");
+
+:root {
+  --blue: #00bae7;
+  --green: #00c142;
+  --orange: #e9b80d;
+  --purple: #b200c1;
+  --background: #222222;
+  --iceWhite: #f6f7fb;
+  --nav: #1d1d1d;
+  --skyBlue: #2da7ff;
+  --deepSea: #0e71b8;
+  --fog: #bfdbf7;
+  --blueBlack: #081f2f;
+  --emphesis: #4e1b63;
+}
+
+* {
+  background-color: var(--background);
+  color: var(--iceWhite);
+  font-family: "Nunito Sans", sans-serif;
+  /* padding: 0;
+    margin: 0; */
+  box-sizing: border-box;
+}
+
+.body{
+  overflow-x: hidden;
+
+}
+
+.header {
+  display: flex;
+  width: 100%;
+}
+
+#createRoom {
+  display: flex;
+  justify-content: center;
+  margin-left: 60%;
+  flex-direction: column;
+}
+
+.newRoom {
+  color: var(--purple);
+  background-color: #2da7ff;
+  width: 120%;
+  color: white;
+  border-radius: 3rem;
+}
+
+.newBulb {
+  color: var(--purple);
+  background-color: #2da7ff;
+  width: 120%;
+  color: white;
+  border-radius: 3rem;
+}
+
+.rooms {
+  display: flex;
+  flex-direction: column;
+  border: 3rem;
+  border-color: var(--fog);
+  justify-content: center;
+  margin:auto;
+}
+
+.roomCard {
+  display: flex;
+  justify-content: center;
+  background-color:var(--fog);
+  width: 80%;
+  justify-content: center;
+  border-radius: 5px;
+  align-items: center; 
+  display: flex;
+  margin: 5%;
+  color: #000000;
+} 
+
+.bedRoom {
+  background-color: #e9b80d;
+  width: 80%;
+  justify-content: center;
+  border-radius: 5px;
+  align-items: center;
+  display: flex;
+ }
+
+#bedRoom {
+  background-color: #e9b80d;
+  width: 80%;
+  justify-content: center;
+  border-radius: 5px;
+  align-items: center;
+  display: flex;
+}
+
+.kitchen {
+  background-color:var(--fog);
+  width: 80%;
+  justify-content: center;
+  border-radius: 5px;
+  align-items: center; 
+  display: flex;
+  margin: 5%;
+  color: #000000;
+} 
+
+.livingRoom {
+    background-color: #f477ff;
+    width: 80%;
+    justify-content: center;
+    border-radius: 5px;
+    align-items: center;
+    display: flex;
+    margin-bottom: 10%;
+}
+
+.imgBed {
+  background-color: #e9b80d;
+}
+
+.imgKit {
+  background-color: var(--fog);
+}
+
+.imgLiv{
+  background-color: #f477ff;
+}
+
+.bedRoomName {
+  display: flex;
+  background-color: #e9b80d;
+  justify-content: center;
+}
+
+.roomName {
+  display: flex;
+  background-color: var(--fog);
+  justify-content: center;
+  color: #000000;
+}
+
+.livRoomName {
+  display: flex;
+  background-color: #f477ff;
+  justify-content: center;
+  color: #000000;
+}
+
+.bedRoom {
+  background-color: #e9b80d;
+  display: flex;
+}
+
+.bedLightsComp {
+  background-color: #e9b80d;
+  align-items: center;
+}
+
+.kitLightsComp {
+  background-color: var(--fog);
+  align-items: center;
+}
+
+.livLightsComp {
+  background-color: #f477ff;
+  align-items: center;
+}
+
+.bedLights {
+  background-color: #e9b80d;
+}
+
+.kitLights {
+  background-color: var(--fog);
+}
+
+.livLights {
+  background-color: #f477ff;
+}
+
+.bedImgLights {
+  display: flex;
+  background-color: #e9b80d;
+  justify-content: center;
+}
+
+.kitImgLights {
+  display: flex;
+  background-color: var(--fog);
+  justify-content: center;
+}
+
+.livImgLights {
+  display: flex;
+  background-color: #f477ff;
+  justify-content:center;
+}
+
+.bedLight {
+  background-color: #e9b80d;
+  display: flex;
+  justify-content: center;
+}
+
+.kitLight {
+  background-color: var(--fog);
+}
+
+.livLight {
+  background-color: #f477ff;
+}
+
+.bedPresetText {
+  background-color: #e9b80d;
+}
+
+.kitPresetText {
+  background-color: var(--fog);
+  color: #000000;
+}
+
+.livPresetText {
+  background-color: #f477ff;
+  color: #000000;
+}
+
+.navBar {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  background-color: var(--nav);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: 100%;
+  text-align: center;
+  z-index: 100;
+  padding: 0;
+}
+
+.navButton {
+  display: flex;
+  flex-direction: column;
+  max-height: 3.4rem;
+  cursor: pointer;
+}

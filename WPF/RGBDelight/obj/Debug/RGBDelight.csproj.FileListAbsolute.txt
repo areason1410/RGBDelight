@@ -1,0 +1,8 @@
+C:\Users\Aaron\source\repos\RGBDelight\RGBDelight\obj\Debug\RGBDelight.csproj.AssemblyReference.cache
+C:\Users\Aaron\source\repos\RGBDelight\RGBDelight\obj\Debug\RGBDelight.csproj.CoreCompileInputs.cache
+C:\Users\Aaron\Desktop\RGBDelight\WPF\RGBDelight\bin\Debug\RGBDelight.dll
+C:\Users\Aaron\Desktop\RGBDelight\WPF\RGBDelight\bin\Debug\RGBDelight.pdb
+C:\Users\Aaron\Desktop\RGBDelight\WPF\RGBDelight\obj\Debug\RGBDelight.csproj.AssemblyReference.cache
+C:\Users\Aaron\Desktop\RGBDelight\WPF\RGBDelight\obj\Debug\RGBDelight.csproj.CoreCompileInputs.cache
+C:\Users\Aaron\Desktop\RGBDelight\WPF\RGBDelight\obj\Debug\RGBDelight.dll
+C:\Users\Aaron\Desktop\RGBDelight\WPF\RGBDelight\obj\Debug\RGBDelight.pdb
