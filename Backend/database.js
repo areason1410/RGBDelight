@@ -16,7 +16,9 @@ module.exports = {
     changePassword,
     changeEmail,
     createRoom,
-    addUser
+    addUser,
+    getRoom,
+    addBulb
 }
 
 async function initialiseDatabase() {
@@ -32,7 +34,16 @@ async function initialiseDatabase() {
                 console.log(err)
             }
         })
-        database.run("CREATE TABLE IF NOT EXISTS rooms(bulb text, effect text, colour text)")
+        database.run("CREATE TABLE IF NOT EXISTS rooms(id text, name text, bulbs text)", (err) => {
+            if (err) {
+                console.log(err)
+            }
+        })
+        database.run("CREATE TABLE IF NOT EXISTS bulbs(id text, colour text, state text)", (err) => {
+            if (err) {
+                console.log(err)
+            }
+        })
     })
 }
 
@@ -128,7 +139,7 @@ async function changeEmail(username, newEmail) {
 
 async function createRoom() {
     var result = new Promise((resolve, reject) => {
-        database.run("INSERT INTO rooms(bulb, effect, colour) VALUES(?, ?)", [bulb, effect, colour], (err) => {
+        database.run("INSERT INTO room(id, name, bulbs) VALUES(?, ?, ?)", [id, name, bulbs], (err) => {
             if (err) {
                 reject(err);
             }
@@ -139,6 +150,30 @@ async function createRoom() {
     })
     var res = await result;
     return res;
+}
+
+async function addBulb() {
+    var result = new Promise((resolve, reject) => {
+        database.run("INSERT INTO bulbs(id, colour, state) VALUES(?, ?, ?)", [id, colour, state], (err) => {
+            if (err) {
+                reject(err);
+            }
+            else {
+                resolve("good")
+            }
+        })
+    })
+    var res = await result;
+    return res;
+}
+
+async function getRoom(callback) {
+    var room = database.get("SELECT * FROM rooms", (error, result) => {
+        if (error) {
+            return callBack(null)
+        }
+        callback(result);
+    })
 }
 
 

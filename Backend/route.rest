@@ -33,7 +33,7 @@ Content-Type: application/json
 
 {
     "username": "benson",
-    "password": "test"
+    "password": "testing"
 }
 
 ###
@@ -52,7 +52,18 @@ POST http://localhost:3000/database/createRoom
 Content-Type: application/json
 
 {
-    "bulb" : "Hue",
-    "effect" : "fade",
-    "colour" : "#54a3e8"
+    "id" : "abc",
+    "name" : "kitchen",
+    "bulbs" : "bulb2343"
+}
+
+###
+
+POST http://localhost:3000/database/addBulb
+Content-Type: application/json
+
+{
+    "id" : "abcd",
+    "colour" : "#FF0000",
+    "state" : "on"
 }

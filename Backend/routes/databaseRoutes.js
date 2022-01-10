@@ -41,9 +41,15 @@ router.post("/changeEmail", async (req, res) => {
 })
 
 router.post("/createRoom", async (req, res) => {
-    db.addUser(req.body.bulb, req.body.effect, req.body.colour)
+    db.createRoom(req.body.id, req.body.name, req.body.bulbs)
     res.send("Complete")
 })
+
+router.post("/addbulb", async (req, res) => {
+    db.addBulb(req.body.id, req.body.colour, req.body.state)
+    res.send("complete")
+})
+
 
 module.exports = router;
 
