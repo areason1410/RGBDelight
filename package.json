@@ -1,0 +1,26 @@
+{
+  "name": "rgbdelight",
+  "version": "1.0.0",
+  "description": "House lighting system",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/areason1410/RGBDelight.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/areason1410/RGBDelight/issues"
+  },
+  "homepage": "https://github.com/areason1410/RGBDelight#readme",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "serialport": "^9.2.4",
+    "sqlite3": "^5.0.2"
+  }
+}
