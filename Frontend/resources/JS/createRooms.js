@@ -1,14 +1,14 @@
-let buttonBedRoom = document.getElementById("bedRoom").addEventListener("click", () => {
-        var room = document.createElement("section");
-        card.classList.add("rooms");
-        var name = document.createElement("p");
-        name.classList.add("BedRoom");
-        name.innerText = doc.data(bedRoom).name
-        room.appendChild(name)
-        room.appendChild(image)
-        room.appendChild(edit);
-        room.id = doc.id;
-        document.getElementById("newroom").appendChild(room);
 
-        window.location.replace("mainPage.html")
+  const roomNameInput = document.getElementById('createRoomInput')
+  document.getElementById("newRoom").addEventListener("click", () => {
+      fetch("http://localhost:3000/database/createRoom", {
+              method: "POST",
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                    "roomname": roomNameInput.value
+              })
+        }).then(res => {
+              
+              console.log("Request complete! response:", res);
+        });
   })

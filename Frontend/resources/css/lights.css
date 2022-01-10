@@ -1,0 +1,31 @@
+* {
+    background-color: var(--background);
+    color: var(--iceWhite);
+    font-family: "Nunito Sans", sans-serif;
+    /* padding: 0;
+      margin: 0; */
+    box-sizing: border-box;
+}
+
+.RInput {
+    outline: none;
+    margin: 25px;
+    border-color: #0E71B8;
+}
+
+.GInput {
+    border-color: #0E71B8;
+}
+
+.BInput {
+    margin: 25px;
+}
+
+.applyButton {
+    display: flex;
+    margin: auto;
+    border: none;
+    background-color: #662483;
+    text-align: center;
+
+}

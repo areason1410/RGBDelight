@@ -23,7 +23,6 @@ namespace RGBDelight.Views
         public Grid RootGrid { get; private set; }
         private TextBox TextBox_Test;
         private Room room;
-        private MainVM mainVM;
 
         private void backButtonClicked(object sender, RoutedEventArgs e)
         {
@@ -32,9 +31,9 @@ namespace RGBDelight.Views
 
         private void addLightButtonClicked(object sender, RoutedEventArgs e)
         {
-            AddRoomPopup popup = new AddRoomPopup();
+            AddLightPopup popup = new AddLightPopup();
             popup.ShowDialog();
-            mainVM.AddLight(room, new LED(0,0,0));
+            MainVM.AddLight(room, new LED(0,0,0));
         }
 
 
@@ -78,7 +77,9 @@ namespace RGBDelight.Views
         {
             ItemsPanelTemplate itemsPanelTemplate = new ItemsPanelTemplate();
             FrameworkElementFactory frameworkElementFactory = new FrameworkElementFactory(typeof(WrapPanel));
-            //frameworkElementFactory.SetValue(WrapPanel.MaxWidthProperty, screenWidth);
+            frameworkElementFactory.SetValue(WrapPanel.MaxWidthProperty, Constants.screenWidth);
+            frameworkElementFactory.SetValue(WrapPanel.OrientationProperty, Orientation.Vertical);
+            frameworkElementFactory.SetValue(WrapPanel.HorizontalAlignmentProperty, HorizontalAlignment.Center);
             //frameworkElementFactory.SetValue(TextBlock.MarginProperty, new Thickness(50));
 
             itemsPanelTemplate.VisualTree = frameworkElementFactory;
@@ -93,10 +94,18 @@ namespace RGBDelight.Views
         {
             Style style = new Style();
             style.TargetType = typeof(ListViewItem);
-            //style.Setters.Add(new Setter(ListView.MarginProperty, new Thickness((screenWidth / 75))));
+            style.Setters.Add(new Setter(ListView.MarginProperty, Constants.LightsViewMargin));
 
             return style;
         }
+
+
+       
+        public void brightnessSliderMoved(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            //brightnessElementFactory.SetValue(Label.ContentProperty, e.NewValue);
+        }
+
 
         /// <summary>
         /// 
@@ -107,14 +116,48 @@ namespace RGBDelight.Views
             DataTemplate gridViewDataTemplate = new DataTemplate();
             gridViewDataTemplate.DataType = typeof(LED);
 
-            FrameworkElementFactory gridViewElementFactory = new FrameworkElementFactory(typeof(ListBox));
+            FrameworkElementFactory gridViewElementFactory = new FrameworkElementFactory(typeof(WrapPanel));
             gridViewElementFactory.Name = "listViewElementFactory";
-            //gridViewElementFactory.SetValue(GridView.);
+            gridViewElementFactory.SetValue(WrapPanel.OrientationProperty, Orientation.Vertical);
+            gridViewElementFactory.SetValue(WrapPanel.BackgroundProperty, Utils.GetBrush(Colours.White));
+            gridViewElementFactory.SetValue(WrapPanel.MinWidthProperty, Constants.screenWidth/2);
 
-            FrameworkElementFactory lightElementFactory = new FrameworkElementFactory(typeof(TextBlock));
-            lightElementFactory.SetBinding(TextBlock.TextProperty, new Binding("ID"));
+            FrameworkElementFactory row1 = new FrameworkElementFactory(typeof(Grid));
+            row1.SetValue(WrapPanel.MinWidthProperty, Constants.screenWidth / 2);
+            //row1.SetValue(WrapPanel.HorizontalAlignmentProperty, HorizontalAlignment.Right);
+
+
+
+            FrameworkElementFactory lightElementFactory = new FrameworkElementFactory(typeof(Label));
+            lightElementFactory.SetBinding(Label.ContentProperty, new Binding("ID"));
             lightElementFactory.SetValue(TextBlock.ToolTipProperty, "asdf");
-            gridViewElementFactory.AppendChild(lightElementFactory);
+            lightElementFactory.SetValue(Label.HorizontalAlignmentProperty, HorizontalAlignment.Center);
+            //lightElementFactory.SetValue(Label.MarginProperty, Constants.LightsViewLabelMargin);
+            row1.AppendChild(lightElementFactory);
+            
+
+            FrameworkElementFactory switchElementFactory = new FrameworkElementFactory(typeof(CheckBox));
+            switchElementFactory.SetValue(CheckBox.HorizontalAlignmentProperty, HorizontalAlignment.Right);
+            switchElementFactory.SetValue(CheckBox.MarginProperty, Constants.LightsViewLabelMargin);
+            //switchElementFactory.SetValue();
+            row1.AppendChild(switchElementFactory);
+
+
+            gridViewElementFactory.AppendChild(row1);
+
+            FrameworkElementFactory sliderElementFactory = new FrameworkElementFactory(typeof(Slider));
+            sliderElementFactory.SetBinding(Slider.ValueProperty, new Binding("Brightness"));
+            sliderElementFactory.SetValue(Slider.MinWidthProperty, Constants.screenWidth / 2);
+            sliderElementFactory.SetValue(Slider.MinimumProperty, (double)0);
+            sliderElementFactory.SetValue(Slider.MaximumProperty, (double)100);
+            sliderElementFactory.AddHandler(Slider.ValueChangedEvent, new RoutedPropertyChangedEventHandler<double>(brightnessSliderMoved));
+            gridViewElementFactory.AppendChild(sliderElementFactory);
+
+            FrameworkElementFactory brightnessElementFactory = new FrameworkElementFactory(typeof(Label), "brightnessText");
+            brightnessElementFactory.SetBinding(Label.ContentProperty, new Binding("Brightness"));
+            brightnessElementFactory.SetValue(TextBlock.ToolTipProperty, "asdf");
+            brightnessElementFactory.SetValue(Label.HorizontalAlignmentProperty, HorizontalAlignment.Center);
+            gridViewElementFactory.AppendChild(brightnessElementFactory);
 
             gridViewDataTemplate.VisualTree = gridViewElementFactory;
 
@@ -127,22 +170,21 @@ namespace RGBDelight.Views
 
         private void lightSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            ListView list = e.Source as ListView;
-            //list.SelectedItem
-            //lightList.ItemsSource = (list.SelectedItem as Room).Lights;
-            if (list.SelectedIndex != -1)
-            {
-                LightsView lightsView = new LightsView(mainVM, list.SelectedItem as Room);
-                lightsView.ShowDialog();
-            }
-            list.SelectedIndex = -1;
+            //ListView list = e.Source as ListView;
+            ////list.SelectedItem
+            ////lightList.ItemsSource = (list.SelectedItem as Room).Lights;
+            //if (list.SelectedIndex != -1)
+            //{
+            //    LightsView lightsView = new LightsView(mainVM, list.SelectedItem as Room);
+            //    lightsView.ShowDialog();
+            //}
+            //list.SelectedIndex = -1;
 
         }
 
 
-        public LightsView(MainVM vm, Room selectedRoom)
+        public LightsView(Room selectedRoom)
         {
-            mainVM = vm;
             room = selectedRoom;
 
             this.WindowStyle = WindowStyle.None;
@@ -163,26 +205,44 @@ namespace RGBDelight.Views
             if(room != null) roomText.Text = room.RoomName;
             roomText.FontSize = 24;
             roomText.VerticalAlignment = VerticalAlignment.Center;
+            roomText.Foreground = Utils.GetBrush(Colours.White);
             Grid.SetColumn(roomText, 1);
             Grid.SetRow(roomText, 1);
 
             Button backButton = new Button();
-            backButton.MinWidth = System.Windows.SystemParameters.WorkArea.Width / 10;
+            backButton.MinWidth = System.Windows.SystemParameters.WorkArea.Width / 15;
             backButton.Content = "<-";
+            backButton.Background = Utils.GetBrush(Colours.BackgroundDark);
+            backButton.BorderBrush = Utils.GetBrush(Colours.BackgroundDark);
+            backButton.Foreground = Utils.GetBrush(Colours.White);
             backButton.HorizontalAlignment = HorizontalAlignment.Left;
             backButton.Click += backButtonClicked;
 
+            Border addLightBorder = new Border();
+
             Button addLightButton = new Button();
-            addLightButton.Content = "+ Add Light";
-            addLightButton.MinWidth = System.Windows.SystemParameters.WorkArea.Width / 10;
-            addLightButton.HorizontalAlignment = HorizontalAlignment.Right;
+            addLightButton.Content = "+ Add light";
+            //aSceneomButton.MinWidth = System.Windows.SystemParameters.WorkArea.Width / 10;
+            //aSceneomButton.HorizontalAlignment = HorizontalAlignment.Right;
+            addLightButton.Foreground = Utils.GetBrush(Colours.White);
+            addLightButton.Background = Utils.GetBrush(Colours.Blue);
+            //aSceneomButton.Margin = Constants.AddButtonMargin;
+            addLightButton.BorderBrush = Utils.GetBrush(Colours.Blue);
             addLightButton.Click += addLightButtonClicked;
+
+            addLightBorder.Child = addLightButton;
+            addLightBorder.CornerRadius = new CornerRadius(5);
+            addLightBorder.BorderBrush = Utils.GetBrush(Colours.Blue);
+            addLightBorder.BorderThickness = new Thickness(3);
+            addLightBorder.HorizontalAlignment = HorizontalAlignment.Right;
+            addLightBorder.MinWidth = System.Windows.SystemParameters.WorkArea.Width / 10;
+            addLightBorder.Margin = Constants.AddButtonMargin;
 
 
             DockPanel topDock = new DockPanel();
             topDock.Children.Add(backButton);
             topDock.Children.Add(roomText);
-            topDock.Children.Add(addLightButton);
+            topDock.Children.Add(addLightBorder);
             Grid.SetColumnSpan(topDock, 1);
 
             lightList.ItemTemplate = LightsListViewDataTemplate();
@@ -190,6 +250,7 @@ namespace RGBDelight.Views
             lightList.ItemsPanel = LightListViewItemsPanelTemplate();
             lightList.ItemContainerStyle = LightListItemContainerStyle();
             lightList.Background = Utils.GetBrush(Colours.BackgroundDefault);
+            lightList.BorderBrush = Utils.GetBrush(Colours.BackgroundDefault);
             Grid.SetRow(lightList, 1);
 
 
@@ -236,7 +297,7 @@ namespace RGBDelight.Views
             //this.SizeToContent = SizeToContent.WidthAndHeight;
             RootGrid.Children.Add(topDock);
             RootGrid.Children.Add(lightList);
-            RootGrid.ShowGridLines = true;
+            //RootGrid.ShowGridLines = true;
             this.Content = RootGrid;
         }
 

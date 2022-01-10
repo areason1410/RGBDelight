@@ -41,12 +41,12 @@ router.post("/changeEmail", async (req, res) => {
 })
 
 router.post("/createRoom", async (req, res) => {
-    db.createRoom(req.body.roomid, req.body.roomname)
+    db.createRoom(req.body.roomname)
     res.send("Complete")
 })
 
 router.post("/addbulb", async (req, res) => {
-    db.addBulb(req.body.id, req.body.colour, req.body.state, req.body.roomid)
+    db.addBulb(req.body)
     res.send("complete")
 })
 
@@ -55,6 +55,19 @@ router.post("/getRoom", async (req, res) => {
         console.log(data);
         res.send(data);
     })
+})
+
+
+router.get("/getRooms", async (req, res) => {
+    db.getRooms((data) => {
+        console.log(data);
+        res.send(data);
+    })
+})
+
+router.post("/applyLightChange", async (req, res) => {
+    db.applyLightChange(req.body)
+    console.log("probsdone");
 })
 
 

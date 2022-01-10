@@ -8,20 +8,25 @@ using System.Threading.Tasks;
 
 namespace RGBDelight.ViewModels
 {
-    public class MainVM
+    public static class MainVM
     {
-        private House _house;
-        public MainVM()
+        private static House _house;
+        static MainVM()
         {
             _house = new House();
         }
 
-        public ObservableCollection<Room> Rooms()
+        public static ObservableCollection<Room> Rooms()
         {
             return _house.Rooms;
         }
 
-        public Room GetRoom(Room room)
+        public static ObservableCollection<Scene> Scenes()
+        {
+            return _house.Scenes;
+        }
+
+        public static Room GetRoom(Room room)
         {
             if(_house.Rooms.Contains(room))
             {
@@ -41,7 +46,27 @@ namespace RGBDelight.ViewModels
             }
         }
 
-        public bool AddRoom(Room room)
+        public static Scene GetScenes(Scene scene)
+        {
+            if (_house.Scenes.Contains(scene))
+            {
+                try
+                {
+                    return scene;
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                }
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public static bool AddRoom(Room room)
         {
             try
             {
@@ -54,12 +79,11 @@ namespace RGBDelight.ViewModels
                 throw;
             }
         }
-
-        public bool AddLight(Room room, LED light)
+        public static bool AddScene(Scene scene)
         {
             try
             {
-                room.Lights.Add(light);
+                _house.Scenes.Add(scene);
                 return true;
             }
             catch (Exception)
@@ -69,7 +93,21 @@ namespace RGBDelight.ViewModels
             }
         }
 
-        public bool RemoveRoom(Room room)
+        public static bool AddLight(object room, LED light)
+        {
+            try
+            {
+                (room as Room).Lights.Add(light);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+                throw;
+            }
+        }
+
+        public static bool RemoveRoom(Room room)
         {
             if(_house.Rooms.Contains(room))
             {
@@ -97,13 +135,13 @@ namespace RGBDelight.ViewModels
             }
         }
 
-        public bool RemoveLight(Room room, LED light)
+        public static bool RemoveScene(Scene scene)
         {
-            if (room.Lights.Contains(light))
+            if (_house.Scenes.Contains(scene))
             {
                 try
                 {
-                    if (room.Lights.Remove(light))
+                    if (_house.Scenes.Remove(scene))
                     {
                         return true;
                     }
@@ -124,17 +162,78 @@ namespace RGBDelight.ViewModels
                 return false;
             }
         }
-        public void ChangeColour(LED light, byte r, byte g, byte b)
+
+        public static bool RemoveLight(object room, LED light)
+        {
+            if ((room as Room).Lights.Contains(light))
+            {
+                try
+                {
+                    if ((room as Room).Lights.Remove(light))
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+
+                }
+                catch (Exception)
+                {
+                    return false;
+                    throw;
+                }
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public static bool ApplyScene(Scene scene, Room room)
+        {
+            if(_house.Scenes.Contains(scene) && _house.Rooms.Contains(room))
+            {
+                try
+                {
+                    for (int i = 0; i < room.Lights.Count; i++)
+                    {
+                        try
+                        {
+                            room.Lights[i].RGB = scene.Lights[i].RGB;
+                            room.Lights[i].Brightness = scene.Lights[i].Brightness;
+
+                        }
+                        catch (Exception)
+                        {
+
+                            throw;
+                        }
+                    }
+
+                    return true;
+                }
+                catch (Exception)
+                {
+                    return false;
+                    throw;
+                }
+            }
+            return true;
+        }
+
+        public static void ChangeColour(LED light, byte r, byte g, byte b)
         {
             light.RGB = new Tuple<byte, byte, byte>(r, g, b);
         }
 
-        public void On(LED light)
+        public static void On(LED light)
         {
 
         }
 
-        public void Off(LED light)
+        public static void Off(LED light)
         {
 
         }

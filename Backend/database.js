@@ -19,7 +19,8 @@ module.exports = {
     addUser,
     getRoom,
     addBulb,
-    getRooms
+    getRooms,
+    applyLightChange
 }
 
 async function initialiseDatabase() {
@@ -114,9 +115,23 @@ async function changeEmail(username, newEmail) {
     return res
 }
 
-async function createRoom() {
+async function createRoom(roomname) {
+
+    var getID = new Promise((resolve, reject) => {
+        let tempID = 0;
+
+        database.all("SELECT RoomID FROM rooms", (error, result) => {
+            result.forEach(id => {
+                if(tempID <= id.RoomID) tempID = id.RoomID+1;
+            })
+
+            resolve(tempID);
+        })
+    })
+    const newID = await getID;
+
     var result = new Promise((resolve, reject) => {
-        database.run("INSERT INTO rooms(RoomID, RoomName) VALUES(?, ?)", [roomid, roomname], (err) => {
+        database.run("INSERT INTO rooms(RoomID, RoomName) VALUES(?, ?)", [newID, roomname], (err) => {
             if (err) {
                 reject(err);
             }
@@ -129,9 +144,25 @@ async function createRoom() {
     return res;
 }
 
-async function addBulb() {
+async function addBulb(e) {
+
+    var getID = new Promise((resolve, reject) => {
+        let tempID = 0;
+
+        database.all("SELECT BulbID FROM bulbs", (error, result) => {
+            result.forEach(id => {
+                if(tempID <= id.BulbID) tempID = id.BulbID+1;
+            })
+
+            resolve(tempID);
+        })
+    })
+    const newID = await getID;
+
+    const data = [newID, 255, 255, 255, 100, 1, e.RoomID]
+
     var result = new Promise((resolve, reject) => {
-        database.run("INSERT INTO bulbs(BulbID, colour, state, RoomID) VALUES(?, ?, ?, ?)", [id, colour, state, roomid], (err) => {
+        database.run("INSERT INTO bulbs(BulbID, R, G, B, Brightness, state, RoomID) VALUES(?, ?, ?, ?, ?, ?, ?)", data , (err) => {
             if (err) {
                 reject(err);
             }
@@ -145,32 +176,42 @@ async function addBulb() {
 }
 
 async function getRooms(callback) {
-    var room = database.get("SELECT * FROM rooms", (error, result) => {
+    var room = database.all("SELECT * FROM rooms", (error, result) => {
         if (error) {
-            return callBack(null)
         }
-        callback(result);
+        return callback(result);
     })
 }
 
 async function getRoom(roomid, callback) {
 
-    var results = []
-
-    var room = database.all("SELECT * FROM bulbs WHERE RoomID = ?", roomid, (error, row) => {
+    var room = database.all("SELECT * FROM bulbs WHERE RoomID = ?", roomid, (error, result) => {
         if (error) {
         }
-        //console.log(row);
-        results.push(row);
-        return callback(results);
-        //console.log(results);
+        return callback(result);
     })
 
-    // console.log(results);
 }
 
 
+async function applyLightChange(e)
+{
+    var result = new Promise((resolve, reject) => {
+        let newData = [e.R, e.G, e.B, e.Brightness, e.state, e.RoomID, e.BulbID]
+        database.run("UPDATE bulbs SET R = ?, G = ?, B = ?, Brightness = ?, state = ? WHERE RoomID = ? AND BulbID = ?", newData, (error) => {
+            if(error)
+            {
+                reject(error)
+            }  
+            else
+            {
+                resolve("done");
+            }
+        });
+    })
+    
 
+}
 async function createScene() {
 
 }
