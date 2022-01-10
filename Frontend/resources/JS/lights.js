@@ -27,18 +27,21 @@ fetch(url, {
         lightInfo.appendChild(lightID);
 
         const r = document.createElement("input");
+        r.classList.add("RInput")
         r.type = "text";
         r.placeholder = "Red";
         r.value = light.R;
         lightInfo.append(r);
 
         const g = document.createElement("input");
+        g.classList.add("GInput")
         g.type = "text";
         g.placeholder = "Green";
         g.value = light.G
         lightInfo.append(g);
-        
+
         const b = document.createElement("input");
+        b.classList.add("BInput")
         b.type = "text";
         b.placeholder = "Blue";
         b.value = light.B;
@@ -70,15 +73,15 @@ fetch(url, {
                 method: "POST",
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                      "R": r.value,
-                      "G": g.value,
-                      "B": b.value,
-                      "state": 1,
-                      "Brightness": slider.value,
-                      "RoomID": light.RoomID,
-                      "BulbID": light.BulbID
-                    })
+                    "R": r.value,
+                    "G": g.value,
+                    "B": b.value,
+                    "state": 1,
+                    "Brightness": slider.value,
+                    "RoomID": light.RoomID,
+                    "BulbID": light.BulbID
                 })
+            })
                 .then(d => d.json()).then(res => {
                     console.log(res);
                 })
