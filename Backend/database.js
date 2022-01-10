@@ -144,9 +144,25 @@ async function createRoom(roomname) {
     return res;
 }
 
-async function addBulb() {
+async function addBulb(e) {
+
+    var getID = new Promise((resolve, reject) => {
+        let tempID = 0;
+
+        database.all("SELECT BulbID FROM bulbs", (error, result) => {
+            result.forEach(id => {
+                if(tempID <= id.BulbID) tempID = id.BulbID+1;
+            })
+
+            resolve(tempID);
+        })
+    })
+    const newID = await getID;
+
+    const data = [newID, 255, 255, 255, 100, 1, e.RoomID]
+
     var result = new Promise((resolve, reject) => {
-        database.run("INSERT INTO bulbs(BulbID, colour, state, RoomID) VALUES(?, ?, ?, ?)", [id, colour, state, roomid], (err) => {
+        database.run("INSERT INTO bulbs(BulbID, R, G, B, Brightness, state, RoomID) VALUES(?, ?, ?, ?, ?, ?, ?)", data , (err) => {
             if (err) {
                 reject(err);
             }

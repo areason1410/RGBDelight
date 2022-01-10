@@ -63,9 +63,7 @@ POST http://localhost:3000/database/addBulb
 Content-Type: application/json
 
 {
-    "id" : "abcd",
-    "colour" : "#FF0000",
-    "state" : "on"
+    "RoomID": 2
 }
 
 ###

@@ -46,7 +46,7 @@ router.post("/createRoom", async (req, res) => {
 })
 
 router.post("/addbulb", async (req, res) => {
-    db.addBulb(req.body.id, req.body.colour, req.body.state, req.body.roomid)
+    db.addBulb(req.body)
     res.send("complete")
 })
 
