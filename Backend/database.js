@@ -19,7 +19,7 @@ module.exports = {
     addUser,
     getRoom,
     addBulb,
-    getRooms
+    getRooms,
 }
 
 async function initialiseDatabase() {
@@ -114,7 +114,7 @@ async function changeEmail(username, newEmail) {
     return res
 }
 
-async function createRoom() {
+async function createRoom(roomid, roomname) {
     var result = new Promise((resolve, reject) => {
         database.run("INSERT INTO rooms(RoomID, RoomName) VALUES(?, ?)", [roomid, roomname], (err) => {
             if (err) {
