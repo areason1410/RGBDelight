@@ -1,6 +1,10 @@
 
   document.getElementById("createRoom").addEventListener("click", () => {
-        fetch("http://localhost:3000/database/createRoom", {
+      var roomInput = document.createElement("input");
+      roomInput.setAttribute('type', 'text')
+      
+      
+      fetch("http://localhost:3000/database/createRoom", {
               method: "POST",
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify({
