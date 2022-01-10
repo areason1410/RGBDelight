@@ -1,4 +1,7 @@
+
+
 const url = "http://localhost:3000/database/getRoom";
+const applyUrl = "http://localhost:3000/database/applyLightChange"
 
 
 var href = window.location.href;
@@ -26,33 +29,45 @@ fetch(url, {
         console.log(light)
 
         const lightInfo = document.createElement("div")
-        lightInfo.classList.add("lightInfo")
+        //lightInfo.classList.add("lightInfo")
 
-        const lightColourText = document.createElement("p")
-        lightColourText.classList.add("lightColourText")
-        lightColourText.innerText = ("Colour: ")
-        lightInfo.appendChild(lightColourText)
+        const lightID = document.createElement("p");
+        lightID.innerText = "Light ID: " + light.BulbID;
+        lightInfo.appendChild(lightID);
 
-        const lightColour = document.createElement("p")
-        lightColour.classList.add("lightColour")
-        lightColour.innerText = light.R, light.G, light.B
-        lightInfo.appendChild(lightColour)
+        const r = document.createElement("input");
+        r.type = "text";
+        r.placeholder = "Red";
+        r.value = light.R;
+        lightInfo.append(r);
 
-        const lightStateText = document.createElement("p")
-        lightStateText.classList.add("lightStateText")
-        lightStateText.innerText = ("State: ")
-        lightInfo.appendChild(lightStateText)
+        const g = document.createElement("input");
+        g.type = "text";
+        g.placeholder = "Green";
+        g.value = light.G
+        lightInfo.append(g);
+        
+        const b = document.createElement("input");
+        b.type = "text";
+        b.placeholder = "Blue";
+        b.value = light.B;
+        lightInfo.append(b);
 
-        const lightState = document.createElement("p")
-        lightState.classList.add("lightState")
-        lightState.innerText = light.state
-        lightInfo.appendChild(lightState)
+
+        const sliderLabel = document.createElement("label");
+        sliderLabel.htmlFor = "slider"
+        sliderLabel.innerText = light.Brightness;
+        lightInfo.appendChild(sliderLabel);
 
         const slider = document.createElement("input")
         slider.type = "range"
         slider.min = 0
         slider.max = 100
         slider.value = light.Brightness
+        slider.id = "slider";
+        slider.addEventListener("input", () => {
+            sliderLabel.innerText = slider.value;
+        })
         lightInfo.appendChild(slider)
 
 
@@ -60,7 +75,22 @@ fetch(url, {
         button.classList.add("applyButton")
         button.innerText = "Apply"
         button.addEventListener("click", () => {
-            console.log(light.RoomID)
+            fetch(applyUrl, {
+                method: "POST",
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                      "R": r.value,
+                      "G": g.value,
+                      "B": b.value,
+                      "state": 1,
+                      "Brightness": slider.value,
+                      "RoomID": light.RoomID,
+                      "BulbID": light.BulbID
+                    })
+                })
+                .then(d => d.json()).then(res => {
+                    console.log(res);
+                })
         })
         lightInfo.appendChild(button)
 
