@@ -1,0 +1,12 @@
+* {
+    background-color: var(--background);
+    color: var(--iceWhite);
+    font-family: "Nunito Sans", sans-serif;
+    /* padding: 0;
+      margin: 0; */
+    box-sizing: border-box;
+}
+
+.lightInfo {
+    background-color: aqua;
+}
