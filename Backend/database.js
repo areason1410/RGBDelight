@@ -115,7 +115,7 @@ async function changeEmail(username, newEmail) {
 
 async function createRoom() {
     var result = new Promise((resolve, reject) => {
-        database.run("INSERT INTO rooms(RoomID, RoomName) VALUES(?, ?)", [id, roomname], (err) => {
+        database.run("INSERT INTO rooms(RoomID, RoomName) VALUES(?, ?)", [roomid, roomname], (err) => {
             if (err) {
                 reject(err);
             }
