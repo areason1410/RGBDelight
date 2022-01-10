@@ -163,13 +163,13 @@ namespace RGBDelight.ViewModels
             }
         }
 
-        public static bool RemoveLight(Room room, LED light)
+        public static bool RemoveLight(object room, LED light)
         {
-            if (room.Lights.Contains(light))
+            if ((room as Room).Lights.Contains(light))
             {
                 try
                 {
-                    if (room.Lights.Remove(light))
+                    if ((room as Room).Lights.Remove(light))
                     {
                         return true;
                     }
