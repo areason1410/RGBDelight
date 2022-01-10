@@ -41,12 +41,12 @@ router.post("/changeEmail", async (req, res) => {
 })
 
 router.post("/createRoom", async (req, res) => {
-    db.createRoom(req.body.id, req.body.name, req.body.bulbs)
+    db.createRoom(req.body.roomid, req.body.roomname)
     res.send("Complete")
 })
 
 router.post("/addbulb", async (req, res) => {
-    db.addBulb(req.body.id, req.body.colour, req.body.state)
+    db.addBulb(req.body.id, req.body.colour, req.body.state, req.body.roomid)
     res.send("complete")
 })
 

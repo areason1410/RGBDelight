@@ -71,30 +71,6 @@ async function addUser(username, password) {
     return res;
 }
 
-async function getColours(callBack) {
-    var colours = database.get("SELECT * FROM colours", (error, result) => {
-        if (error) {
-            return callBack(null)
-        }
-        callback(result);
-    })
-}
-
-async function addColour(R, G, B) {
-    var result = new Promise((resolve, reject) => {
-        database.run("INSERT INTO colours(R, G, B) VALUES(?, ?, ?"), [R, G, B], (err) => {
-            if (err) {
-                reject(err);
-            }
-            else {
-                resolve("good")
-            }
-        }
-    })
-    var res = await result;
-    return res;
-}
-
 async function checkDetails(username, callback) {
     var account = database.get("SELECT username, password FROM accounts WHERE username == ?", username, (err, result) => {
         if (err) {
@@ -139,7 +115,7 @@ async function changeEmail(username, newEmail) {
 
 async function createRoom() {
     var result = new Promise((resolve, reject) => {
-        database.run("INSERT INTO room(id, name, bulbs) VALUES(?, ?, ?)", [id, name, bulbs], (err) => {
+        database.run("INSERT INTO rooms(RoomID, RoomName) VALUES(?, ?)", [id, roomname], (err) => {
             if (err) {
                 reject(err);
             }
@@ -154,7 +130,7 @@ async function createRoom() {
 
 async function addBulb() {
     var result = new Promise((resolve, reject) => {
-        database.run("INSERT INTO bulbs(id, colour, state) VALUES(?, ?, ?)", [id, colour, state], (err) => {
+        database.run("INSERT INTO bulbs(BulbID, colour, state, RoomID) VALUES(?, ?, ?, ?)", [id, colour, state, roomid], (err) => {
             if (err) {
                 reject(err);
             }
