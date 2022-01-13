@@ -8,7 +8,7 @@ const router = express.Router();
 
 router.post("/changeColour", async(req, res) => {
     port.write(`${req.body.red}, ${req.body.green}, ${req.body.blue}`);
-    console.log(`${req.body.red}, ${req.body.green}, ${req.body.blue}`);
+    //console.log(`${req.body.red}, ${req.body.green}, ${req.body.blue}`);
 })
 
 module.exports = router;

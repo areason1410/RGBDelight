@@ -1,9 +1,11 @@
 //for strcmp check if == -10
 
+uint8_t ID = 1;
+
 // which pins we are using
-uint8_t rPin = 13;
+uint8_t rPin = 11;
 uint8_t gPin = 12;
-uint8_t bPin = 11;
+uint8_t bPin = 10;
 // forward declration of our functions
 void changeLedColours(uint8_t rVal, uint8_t gVal, uint8_t bVal);
 void checkInputs();
@@ -30,9 +32,9 @@ void loop()
 // change the rgb colours for the bulb, takes values from 0 to 255
 void changeLedColours(uint8_t rVal, uint8_t gVal, uint8_t bVal)
 {
-    analogWrite(rPin, constrain(255-rVal, 0, 255));
-    analogWrite(gPin, constrain(255-gVal, 0, 255));
-    analogWrite(bPin, constrain(255-bVal, 0, 255));
+    analogWrite(rPin, constrain(rVal, 0, 255));
+    analogWrite(gPin, constrain(gVal, 0, 255));
+    analogWrite(bPin, constrain(bVal, 0, 255));
 }
 
 // Checking if the serial has any inputs, and if it does call the changeLedColours() function

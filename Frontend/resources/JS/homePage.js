@@ -1,6 +1,6 @@
 
-
-const url = "http://localhost:3000/database/getRooms";
+const baseUrl = "http://10.1.21.58:3000"
+const url = baseUrl + "/database/getRooms";
 
 fetch(url, {method: "GET",
 }).then(d => d.json()).then(res => {

@@ -1,8 +1,8 @@
 
-
-const url = "http://localhost:3000/database/getRoom";
-const applyUrl = "http://localhost:3000/database/applyLightChange"
-const portUrl = "http://localhost:3000/PortAPI/changeColour"
+const baseUrl = "http://10.1.21.58:3000"
+const url = baseUrl + "/database/getRoom";
+const applyUrl = baseUrl + "/database/applyLightChange"
+const portUrl = baseUrl + "/PortAPI/changeColour"
 
 
 
@@ -86,18 +86,18 @@ fetch(url, {
                     console.log(res);
                 })
                 //uncomment in production
-                // fetch(portUrl, {
-                //     method: "POST",
-                //     headers: { 'Content-Type': 'application/json' },
-                //     body: JSON.stringify({
-                //           "red": r.value,
-                //           "green": g.value,
-                //           "blue": b.value
-                //         })
-                //     })
-                //     .then(d => d.json()).then(res => {
-                //         console.log("applied on bulb");
-                //     })
+                fetch(portUrl, {
+                    method: "POST",
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                          "red": r.value,
+                          "green": g.value,
+                          "blue": b.value
+                        })
+                    })
+                    .then(d => d.json()).then(res => {
+                        console.log("applied on bulb");
+                    })
         })
         lightInfo.appendChild(button)
 

@@ -105,3 +105,14 @@ Content-Type: application/json
     "RoomID": 2,
     "BulbID": 1
 }
+
+###
+
+POST http://localhost:3000/PortAPI/changeColour
+Content-Type: application/json
+
+{
+    "red": 255,
+    "green": 255,
+    "blue": 255
+}
